@@ -2,9 +2,11 @@ context("Dict")
 
 test_that("Dict", {
     # initialize
-    expect_error(Dict$new(1:2), "all elems must be named")
+    expect_error(Dict$new(1:2), "all items must be named")
     expect_equal(Dict$new()$keys(), character(0))
     d <- Dict$new(c(x=1L, y=2L))
+    expect_is(d, "Dict")
+    expect_is(d, "Container")
     expect_error(d$get("z"), "key 'z' not in Dict")
     expect_error(d$add(key="", 3L, "zero-length key"))
     expect_equal(as.integer(d$values()), 1:2)
@@ -57,9 +59,21 @@ test_that("Dict", {
     expect_equal(names(sort(v)), names(sort(v2)))
 })
 
+
 test_that("Dict sort", {
     d <- Dict$new()
     d$add("b", 1)$add("a", 2)
     expect_equal(d$keys(), c("b", "a"))
     expect_equal(d$sort()$keys(), c("a", "b"))
 })
+
+test_that("Dict update", {
+    d1 <- Dict$new(list(A=1, B=2, C=12))
+    expect_error(d1$update(list()), "arg must be a Dict")
+    d2 <- Dict$new(list(          C=3, D=4))
+    expect_equal(d1$update(Dict$new()), d1)
+    expect_equal(d1$update(d2)$values(), list(A=1, B=2, C=3, D=4))
+    expect_equal(Dict$new()$update(d2), d2)
+})
+
+

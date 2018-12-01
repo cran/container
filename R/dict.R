@@ -11,13 +11,16 @@
 #' Inherits all methods from \code{\link[container]{Container}} but overrides the
 #' internal initialize function and the following member functions:
 #' \describe{
-#'  \item{\code{add(key, value)}}{If \code{key} not yet in \code{Dict}, set
-#'      \code{key} to \code{elem}, otherwise raise an error.}
+#'  \item{\code{add(key, value)}}{If \code{key} not yet in \code{Dict}, insert
+#'      \code{value} at \code{key}, otherwise signal an error.}
 #'  \item{\code{discard(key)}}{If \code{key} in \code{Dict}, remove it.}
 #'  \item{\code{has(key)}}{TRUE if \code{key} in \code{Dict} else FALSE.}
 #'  \item{\code{remove(key)}}{If \code{key} in \code{Dict}, remove it, otherwise
 #'      raise an error.}
 #' }
+#'
+#' @section R6 constructor:
+#' \code{Dict$new(x=list())}
 #'
 #' @section Dict methods:
 #' \describe{
@@ -36,6 +39,9 @@
 #'      \code{Dict}, an error is thrown unless \code{add} was set to
 #'      \code{TRUE}}
 #'  \item{\code{sort(decr=FALSE)}}{Sort values in dictionary according to keys.}
+#'  \item{\code{update(other=Dict$new())}}{Adds element(s) of other to the 
+#'      dictionary if the key is not in the dictionary and updates the key with
+#'      the new value otherwise.}
 #' }
 #' @examples
 #' ages <- Dict$new(c(Peter=24, Lisa=23, Bob=32))
@@ -66,16 +72,18 @@ Dict <- R6::R6Class("Dict",
         popitem = function() {},
         remove = function(key) {},
         set = function(key, value, add=FALSE) {},
-        sort = function(decr=FALSE) {}
+        sort = function(decr=FALSE) {},
+        update = function(other) {}
     ),
 )
 
 # Dict method implementations
 Dict$set("public", "initialize", overwrite=TRUE,
     function(x=list()) {
+        if (is.data.frame(x)) x <- as.list(x)
         name_len <- sapply(names(x), nchar)
         if (length(x) != length(name_len) || any(name_len == 0)) {
-            stop("all elems must be named")
+            stop("all items must be named")
         }
         super$initialize(x)
         if (any(duplicated(self$keys()))) stop("duplicated keys")
@@ -164,5 +172,18 @@ Dict$set("public", "sort", overwrite=TRUE,
         invisible(self)
     }
 )
+
+Dict$set("public", "update", overwrite=TRUE,
+    # Add elements of other dict to the dictionary if the key is not in the
+    # dictionary and update the key with the new value otherwise.
+    function(other=Dict$new()) {
+        if (!inherits(other, "Dict")) stop("arg must be a Dict")
+        for (key in other$keys()) {
+            self$set(key, other$get(key), add=TRUE)
+        }
+        invisible(self)
+    }
+)
 Dict$lock()
+
 

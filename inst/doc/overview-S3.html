@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+<title>Overview</title>
+
+<script type="text/javascript">
+window.onload = function() {
+  var imgs = document.getElementsByTagName('img'), i, img;
+  for (i = 0; i < imgs.length; i++) {
+    img = imgs[i];
+    // center an image if it is the only element of its parent
+    if (img.parentElement.childElementCount === 1)
+      img.parentElement.style.textAlign = 'center';
+  }
+};
+</script>
+
+<!-- Styles for R syntax highlighter -->
+<style type="text/css">
+   pre .operator,
+   pre .paren {
+     color: rgb(104, 118, 135)
+   }
+
+   pre .literal {
+     color: #990073
+   }
+
+   pre .number {
+     color: #099;
+   }
+
+   pre .comment {
+     color: #998;
+     font-style: italic
+   }
+
+   pre .keyword {
+     color: #900;
+     font-weight: bold
+   }
+
+   pre .identifier {
+     color: rgb(0, 0, 0);
+   }
+
+   pre .string {
+     color: #d14;
+   }
+</style>
+
+<!-- R syntax highlighter -->
+<script type="text/javascript">
+var hljs=new function(){function m(p){return p.replace(/&/gm,"&amp;").replace(/</gm,"&lt;")}function f(r,q,p){return RegExp(q,"m"+(r.cI?"i":"")+(p?"g":""))}function b(r){for(var p=0;p<r.childNodes.length;p++){var q=r.childNodes[p];if(q.nodeName=="CODE"){return q}if(!(q.nodeType==3&&q.nodeValue.match(/\s+/))){break}}}function h(t,s){var p="";for(var r=0;r<t.childNodes.length;r++){if(t.childNodes[r].nodeType==3){var q=t.childNodes[r].nodeValue;if(s){q=q.replace(/\n/g,"")}p+=q}else{if(t.childNodes[r].nodeName=="BR"){p+="\n"}else{p+=h(t.childNodes[r])}}}if(/MSIE [678]/.test(navigator.userAgent)){p=p.replace(/\r/g,"\n")}return p}function a(s){var r=s.className.split(/\s+/);r=r.concat(s.parentNode.className.split(/\s+/));for(var q=0;q<r.length;q++){var p=r[q].replace(/^language-/,"");if(e[p]){return p}}}function c(q){var p=[];(function(s,t){for(var r=0;r<s.childNodes.length;r++){if(s.childNodes[r].nodeType==3){t+=s.childNodes[r].nodeValue.length}else{if(s.childNodes[r].nodeName=="BR"){t+=1}else{if(s.childNodes[r].nodeType==1){p.push({event:"start",offset:t,node:s.childNodes[r]});t=arguments.callee(s.childNodes[r],t);p.push({event:"stop",offset:t,node:s.childNodes[r]})}}}}return t})(q,0);return p}function k(y,w,x){var q=0;var z="";var s=[];function u(){if(y.length&&w.length){if(y[0].offset!=w[0].offset){return(y[0].offset<w[0].offset)?y:w}else{return w[0].event=="start"?y:w}}else{return y.length?y:w}}function t(D){var A="<"+D.nodeName.toLowerCase();for(var B=0;B<D.attributes.length;B++){var C=D.attributes[B];A+=" "+C.nodeName.toLowerCase();if(C.value!==undefined&&C.value!==false&&C.value!==null){A+='="'+m(C.value)+'"'}}return A+">"}while(y.length||w.length){var v=u().splice(0,1)[0];z+=m(x.substr(q,v.offset-q));q=v.offset;if(v.event=="start"){z+=t(v.node);s.push(v.node)}else{if(v.event=="stop"){var p,r=s.length;do{r--;p=s[r];z+=("</"+p.nodeName.toLowerCase()+">")}while(p!=v.node);s.splice(r,1);while(r<s.length){z+=t(s[r]);r++}}}}return z+m(x.substr(q))}function j(){function q(x,y,v){if(x.compiled){return}var u;var s=[];if(x.k){x.lR=f(y,x.l||hljs.IR,true);for(var w in x.k){if(!x.k.hasOwnProperty(w)){continue}if(x.k[w] instanceof Object){u=x.k[w]}else{u=x.k;w="keyword"}for(var r in u){if(!u.hasOwnProperty(r)){continue}x.k[r]=[w,u[r]];s.push(r)}}}if(!v){if(x.bWK){x.b="\\b("+s.join("|")+")\\s"}x.bR=f(y,x.b?x.b:"\\B|\\b");if(!x.e&&!x.eW){x.e="\\B|\\b"}if(x.e){x.eR=f(y,x.e)}}if(x.i){x.iR=f(y,x.i)}if(x.r===undefined){x.r=1}if(!x.c){x.c=[]}x.compiled=true;for(var t=0;t<x.c.length;t++){if(x.c[t]=="self"){x.c[t]=x}q(x.c[t],y,false)}if(x.starts){q(x.starts,y,false)}}for(var p in e){if(!e.hasOwnProperty(p)){continue}q(e[p].dM,e[p],true)}}function d(B,C){if(!j.called){j();j.called=true}function q(r,M){for(var L=0;L<M.c.length;L++){if((M.c[L].bR.exec(r)||[null])[0]==r){return M.c[L]}}}function v(L,r){if(D[L].e&&D[L].eR.test(r)){return 1}if(D[L].eW){var M=v(L-1,r);return M?M+1:0}return 0}function w(r,L){return L.i&&L.iR.test(r)}function K(N,O){var M=[];for(var L=0;L<N.c.length;L++){M.push(N.c[L].b)}var r=D.length-1;do{if(D[r].e){M.push(D[r].e)}r--}while(D[r+1].eW);if(N.i){M.push(N.i)}return f(O,M.join("|"),true)}function p(M,L){var N=D[D.length-1];if(!N.t){N.t=K(N,E)}N.t.lastIndex=L;var r=N.t.exec(M);return r?[M.substr(L,r.index-L),r[0],false]:[M.substr(L),"",true]}function z(N,r){var L=E.cI?r[0].toLowerCase():r[0];var M=N.k[L];if(M&&M instanceof Array){return M}return false}function F(L,P){L=m(L);if(!P.k){return L}var r="";var O=0;P.lR.lastIndex=0;var M=P.lR.exec(L);while(M){r+=L.substr(O,M.index-O);var N=z(P,M);if(N){x+=N[1];r+='<span class="'+N[0]+'">'+M[0]+"</span>"}else{r+=M[0]}O=P.lR.lastIndex;M=P.lR.exec(L)}return r+L.substr(O,L.length-O)}function J(L,M){if(M.sL&&e[M.sL]){var r=d(M.sL,L);x+=r.keyword_count;return r.value}else{return F(L,M)}}function I(M,r){var L=M.cN?'<span class="'+M.cN+'">':"";if(M.rB){y+=L;M.buffer=""}else{if(M.eB){y+=m(r)+L;M.buffer=""}else{y+=L;M.buffer=r}}D.push(M);A+=M.r}function G(N,M,Q){var R=D[D.length-1];if(Q){y+=J(R.buffer+N,R);return false}var P=q(M,R);if(P){y+=J(R.buffer+N,R);I(P,M);return P.rB}var L=v(D.length-1,M);if(L){var O=R.cN?"</span>":"";if(R.rE){y+=J(R.buffer+N,R)+O}else{if(R.eE){y+=J(R.buffer+N,R)+O+m(M)}else{y+=J(R.buffer+N+M,R)+O}}while(L>1){O=D[D.length-2].cN?"</span>":"";y+=O;L--;D.length--}var r=D[D.length-1];D.length--;D[D.length-1].buffer="";if(r.starts){I(r.starts,"")}return R.rE}if(w(M,R)){throw"Illegal"}}var E=e[B];var D=[E.dM];var A=0;var x=0;var y="";try{var s,u=0;E.dM.buffer="";do{s=p(C,u);var t=G(s[0],s[1],s[2]);u+=s[0].length;if(!t){u+=s[1].length}}while(!s[2]);if(D.length>1){throw"Illegal"}return{r:A,keyword_count:x,value:y}}catch(H){if(H=="Illegal"){return{r:0,keyword_count:0,value:m(C)}}else{throw H}}}function g(t){var p={keyword_count:0,r:0,value:m(t)};var r=p;for(var q in e){if(!e.hasOwnProperty(q)){continue}var s=d(q,t);s.language=q;if(s.keyword_count+s.r>r.keyword_count+r.r){r=s}if(s.keyword_count+s.r>p.keyword_count+p.r){r=p;p=s}}if(r.language){p.second_best=r}return p}function i(r,q,p){if(q){r=r.replace(/^((<[^>]+>|\t)+)/gm,function(t,w,v,u){return w.replace(/\t/g,q)})}if(p){r=r.replace(/\n/g,"<br>")}return r}function n(t,w,r){var x=h(t,r);var v=a(t);var y,s;if(v){y=d(v,x)}else{return}var q=c(t);if(q.length){s=document.createElement("pre");s.innerHTML=y.value;y.value=k(q,c(s),x)}y.value=i(y.value,w,r);var u=t.className;if(!u.match("(\\s|^)(language-)?"+v+"(\\s|$)")){u=u?(u+" "+v):v}if(/MSIE [678]/.test(navigator.userAgent)&&t.tagName=="CODE"&&t.parentNode.tagName=="PRE"){s=t.parentNode;var p=document.createElement("div");p.innerHTML="<pre><code>"+y.value+"</code></pre>";t=p.firstChild.firstChild;p.firstChild.cN=s.cN;s.parentNode.replaceChild(p.firstChild,s)}else{t.innerHTML=y.value}t.className=u;t.result={language:v,kw:y.keyword_count,re:y.r};if(y.second_best){t.second_best={language:y.second_best.language,kw:y.second_best.keyword_count,re:y.second_best.r}}}function o(){if(o.called){return}o.called=true;var r=document.getElementsByTagName("pre");for(var p=0;p<r.length;p++){var q=b(r[p]);if(q){n(q,hljs.tabReplace)}}}function l(){if(window.addEventListener){window.addEventListener("DOMContentLoaded",o,false);window.addEventListener("load",o,false)}else{if(window.attachEvent){window.attachEvent("onload",o)}else{window.onload=o}}}var e={};this.LANGUAGES=e;this.highlight=d;this.highlightAuto=g;this.fixMarkup=i;this.highlightBlock=n;this.initHighlighting=o;this.initHighlightingOnLoad=l;this.IR="[a-zA-Z][a-zA-Z0-9_]*";this.UIR="[a-zA-Z_][a-zA-Z0-9_]*";this.NR="\\b\\d+(\\.\\d+)?";this.CNR="\\b(0[xX][a-fA-F0-9]+|(\\d+(\\.\\d*)?|\\.\\d+)([eE][-+]?\\d+)?)";this.BNR="\\b(0b[01]+)";this.RSR="!|!=|!==|%|%=|&|&&|&=|\\*|\\*=|\\+|\\+=|,|\\.|-|-=|/|/=|:|;|<|<<|<<=|<=|=|==|===|>|>=|>>|>>=|>>>|>>>=|\\?|\\[|\\{|\\(|\\^|\\^=|\\||\\|=|\\|\\||~";this.ER="(?![\\s\\S])";this.BE={b:"\\\\.",r:0};this.ASM={cN:"string",b:"'",e:"'",i:"\\n",c:[this.BE],r:0};this.QSM={cN:"string",b:'"',e:'"',i:"\\n",c:[this.BE],r:0};this.CLCM={cN:"comment",b:"//",e:"$"};this.CBLCLM={cN:"comment",b:"/\\*",e:"\\*/"};this.HCM={cN:"comment",b:"#",e:"$"};this.NM={cN:"number",b:this.NR,r:0};this.CNM={cN:"number",b:this.CNR,r:0};this.BNM={cN:"number",b:this.BNR,r:0};this.inherit=function(r,s){var p={};for(var q in r){p[q]=r[q]}if(s){for(var q in s){p[q]=s[q]}}return p}}();hljs.LANGUAGES.cpp=function(){var a={keyword:{"false":1,"int":1,"float":1,"while":1,"private":1,"char":1,"catch":1,"export":1,virtual:1,operator:2,sizeof:2,dynamic_cast:2,typedef:2,const_cast:2,"const":1,struct:1,"for":1,static_cast:2,union:1,namespace:1,unsigned:1,"long":1,"throw":1,"volatile":2,"static":1,"protected":1,bool:1,template:1,mutable:1,"if":1,"public":1,friend:2,"do":1,"return":1,"goto":1,auto:1,"void":2,"enum":1,"else":1,"break":1,"new":1,extern:1,using:1,"true":1,"class":1,asm:1,"case":1,typeid:1,"short":1,reinterpret_cast:2,"default":1,"double":1,register:1,explicit:1,signed:1,typename:1,"try":1,"this":1,"switch":1,"continue":1,wchar_t:1,inline:1,"delete":1,alignof:1,char16_t:1,char32_t:1,constexpr:1,decltype:1,noexcept:1,nullptr:1,static_assert:1,thread_local:1,restrict:1,_Bool:1,complex:1},built_in:{std:1,string:1,cin:1,cout:1,cerr:1,clog:1,stringstream:1,istringstream:1,ostringstream:1,auto_ptr:1,deque:1,list:1,queue:1,stack:1,vector:1,map:1,set:1,bitset:1,multiset:1,multimap:1,unordered_set:1,unordered_map:1,unordered_multiset:1,unordered_multimap:1,array:1,shared_ptr:1}};return{dM:{k:a,i:"</",c:[hljs.CLCM,hljs.CBLCLM,hljs.QSM,{cN:"string",b:"'\\\\?.",e:"'",i:"."},{cN:"number",b:"\\b(\\d+(\\.\\d*)?|\\.\\d+)(u|U|l|L|ul|UL|f|F)"},hljs.CNM,{cN:"preprocessor",b:"#",e:"$"},{cN:"stl_container",b:"\\b(deque|list|queue|stack|vector|map|set|bitset|multiset|multimap|unordered_map|unordered_set|unordered_multiset|unordered_multimap|array)\\s*<",e:">",k:a,r:10,c:["self"]}]}}}();hljs.LANGUAGES.r={dM:{c:[hljs.HCM,{cN:"number",b:"\\b0[xX][0-9a-fA-F]+[Li]?\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\b\\d+(?:[eE][+\\-]?\\d*)?L\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\b\\d+\\.(?!\\d)(?:i\\b)?",e:hljs.IMMEDIATE_RE,r:1},{cN:"number",b:"\\b\\d+(?:\\.\\d*)?(?:[eE][+\\-]?\\d*)?i?\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\.\\d+(?:[eE][+\\-]?\\d*)?i?\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"keyword",b:"(?:tryCatch|library|setGeneric|setGroupGeneric)\\b",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\.\\.\\.",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\.\\.\\d+(?![\\w.])",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\b(?:function)",e:hljs.IMMEDIATE_RE,r:2},{cN:"keyword",b:"(?:if|in|break|next|repeat|else|for|return|switch|while|try|stop|warning|require|attach|detach|source|setMethod|setClass)\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"literal",b:"(?:NA|NA_integer_|NA_real_|NA_character_|NA_complex_)\\b",e:hljs.IMMEDIATE_RE,r:10},{cN:"literal",b:"(?:NULL|TRUE|FALSE|T|F|Inf|NaN)\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"identifier",b:"[a-zA-Z.][a-zA-Z0-9._]*\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"operator",b:"<\\-(?!\\s*\\d)",e:hljs.IMMEDIATE_RE,r:2},{cN:"operator",b:"\\->|<\\-",e:hljs.IMMEDIATE_RE,r:1},{cN:"operator",b:"%%|~",e:hljs.IMMEDIATE_RE},{cN:"operator",b:">=|<=|==|!=|\\|\\||&&|=|\\+|\\-|\\*|/|\\^|>|<|!|&|\\||\\$|:",e:hljs.IMMEDIATE_RE,r:0},{cN:"operator",b:"%",e:"%",i:"\\n",r:1},{cN:"identifier",b:"`",e:"`",r:0},{cN:"string",b:'"',e:'"',c:[hljs.BE],r:0},{cN:"string",b:"'",e:"'",c:[hljs.BE],r:0},{cN:"paren",b:"[[({\\])}]",e:hljs.IMMEDIATE_RE,r:0}]}};
+hljs.initHighlightingOnLoad();
+</script>
+
+
+
+<style type="text/css">
+body, td {
+   font-family: sans-serif;
+   background-color: white;
+   font-size: 13px;
+}
+
+body {
+  max-width: 800px;
+  margin: auto;
+  padding: 1em;
+  line-height: 20px;
+}
+
+tt, code, pre {
+   font-family: 'DejaVu Sans Mono', 'Droid Sans Mono', 'Lucida Console', Consolas, Monaco, monospace;
+}
+
+h1 {
+   font-size:2.2em;
+}
+
+h2 {
+   font-size:1.8em;
+}
+
+h3 {
+   font-size:1.4em;
+}
+
+h4 {
+   font-size:1.0em;
+}
+
+h5 {
+   font-size:0.9em;
+}
+
+h6 {
+   font-size:0.8em;
+}
+
+a:visited {
+   color: rgb(50%, 0%, 50%);
+}
+
+pre, img {
+  max-width: 100%;
+}
+pre {
+  overflow-x: auto;
+}
+pre code {
+   display: block; padding: 0.5em;
+}
+
+code {
+  font-size: 92%;
+  border: 1px solid #ccc;
+}
+
+code[class] {
+  background-color: #F8F8F8;
+}
+
+table, td, th {
+  border: none;
+}
+
+blockquote {
+   color:#666666;
+   margin:0;
+   padding-left: 1em;
+   border-left: 0.5em #EEE solid;
+}
+
+hr {
+   height: 0px;
+   border-bottom: none;
+   border-top-width: thin;
+   border-top-style: dotted;
+   border-top-color: #999999;
+}
+
+@media print {
+   * {
+      background: transparent !important;
+      color: black !important;
+      filter:none !important;
+      -ms-filter: none !important;
+   }
+
+   body {
+      font-size:12pt;
+      max-width:100%;
+   }
+
+   a, a:visited {
+      text-decoration: underline;
+   }
+
+   hr {
+      visibility: hidden;
+      page-break-before: always;
+   }
+
+   pre, blockquote {
+      padding-right: 1em;
+      page-break-inside: avoid;
+   }
+
+   tr, img {
+      page-break-inside: avoid;
+   }
+
+   img {
+      max-width: 100% !important;
+   }
+
+   @page :left {
+      margin: 15mm 20mm 15mm 10mm;
+   }
+
+   @page :right {
+      margin: 15mm 10mm 15mm 20mm;
+   }
+
+   p, h2, h3 {
+      orphans: 3; widows: 3;
+   }
+
+   h2, h3 {
+      page-break-after: avoid;
+   }
+}
+</style>
+
+
+
+</head>
+
+<body>
+<h2>Overview</h2>
+
+<p>The <code>Container</code> class serves as the base class for <code>Deque</code>, <code>Set</code> and <code>Dict</code>, which inherit all methods from <code>Container</code>, except those that are overwritten. In addition, the <code>Container</code> and all its subclasses are iterable, that is, they provide a method returning an <code>Iterator</code> to iterate through the elements of the container object. The S3 interface provides constructor methods for the <code>Container</code> class as well as all its derived classes <code>Deque</code>, <code>Set</code> and <code>Dict</code>, which return objects of these respective classes. Then for each object, S3 methods and operators are provided to emulate the corresponding member methods.</p>
+
+<p>The following table shows member methods divided by class. The top half contains all <code>Container</code>-related methods, each derived by the subclasses to the right unless there is a new entry in a sub-class column, meaning the method is overwritten by the subclass.
+The bottom half contains methods unique to each subclass.</p>
+
+<table><thead>
+<tr>
+<th>Container</th>
+<th>Deque</th>
+<th>Set</th>
+<th>Dict</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>cont &lt;- container()</code></td>
+<td><code>deq &lt;- deque()</code></td>
+<td><code>s &lt;- set()</code></td>
+<td><code>d &lt;- dict()</code></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>add(cont, elem)</code></td>
+<td></td>
+<td><code>add(s, elem)</code></td>
+<td><code>add(d, key, val),        d[key] &lt;- val</code></td>
+</tr>
+<tr>
+<td><code>clear(cont)</code></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>discard(cont, elem, right=F)</code></td>
+<td></td>
+<td></td>
+<td><code>discard(d, key)</code></td>
+</tr>
+<tr>
+<td><code>empty(cont)</code></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>has(cont, elem)</code></td>
+<td></td>
+<td></td>
+<td><code>has(d, key)</code></td>
+</tr>
+<tr>
+<td><code>print(cont, list.len=10)</code></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>remove(cont, elem, right=F)</code></td>
+<td></td>
+<td></td>
+<td><code>remove(d, key)</code></td>
+</tr>
+<tr>
+<td><code>size(cont)</code></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>type(cont)</code></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>values(cont)</code></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td><code>addleft(deq, elem)</code></td>
+<td><code>s1 + s2</code></td>
+<td><code>getval(d, key), d[[key]]</code></td>
+</tr>
+<tr>
+<td></td>
+<td><code>count(deq, elem)</code></td>
+<td><code>s1 / s2</code></td>
+<td><code>keys(d)</code></td>
+</tr>
+<tr>
+<td></td>
+<td><code>peek(deq)</code></td>
+<td><code>s1 - s2</code></td>
+<td><code>peek(d, key, default=NULL), d[key]</code></td>
+</tr>
+<tr>
+<td></td>
+<td><code>peekleft(deq)</code></td>
+<td><code>s1 == s2</code></td>
+<td><code>pop(d, key)</code></td>
+</tr>
+<tr>
+<td></td>
+<td><code>pop(deq)</code></td>
+<td><code>s1 &lt; s2</code></td>
+<td><code>popitem(d)</code></td>
+</tr>
+<tr>
+<td></td>
+<td><code>popleft(deq)</code></td>
+<td><code>s1 &gt; s2</code></td>
+<td><code>setval(d, key, val, add=F),        d[[key, add=F]] &lt;- val</code></td>
+</tr>
+<tr>
+<td></td>
+<td><code>reverse(deq)</code></td>
+<td></td>
+<td><code>sortkey(decr=FALSE)</code></td>
+</tr>
+<tr>
+<td></td>
+<td><code>rotate(deq, n=1L)</code></td>
+<td></td>
+<td><code>update(d, other)</code></td>
+</tr>
+</tbody></table>
+
+<p>Method descriptions are found in the respective online helps (see <code>?container</code>, <code>?deque</code>, <code>?set</code>, and <code>?dict</code>).</p>
+
+<h2>Container</h2>
+
+<p>Objects created using the base <code>container</code> function are ready to be used. Examples of specialized objects using <code>deque</code>, <code>set</code>, and <code>dict</code>, follow below.</p>
+
+<pre><code class="r">library(container)
+#&gt; 
+#&gt; Attaching package: &#39;container&#39;
+#&gt; The following object is masked from &#39;package:base&#39;:
+#&gt; 
+#&gt;     remove
+</code></pre>
+
+<pre><code class="r">collection &lt;- container()
+empty(collection)
+#&gt; [1] TRUE
+</code></pre>
+
+<p>Since the created objects are still the same as when created via the <code>R6</code> interface, they always work both ways:</p>
+
+<pre><code class="r">size(collection)
+#&gt; [1] 0
+
+collection$size()
+#&gt; [1] 0
+</code></pre>
+
+<h4>add</h4>
+
+<p>By default, elements internally are stored in a basic <code>list</code> and therefore can be of any type.</p>
+
+<pre><code class="r">add(collection, 1)
+add(collection, &quot;A&quot;)
+add(collection, data.frame(B=1, C=2))
+type(collection)
+#&gt; [1] &quot;list&quot;
+</code></pre>
+
+<p>The internal representation can always be retrieved directly using the <code>values</code> function.</p>
+
+<pre><code class="r">values(collection)
+#&gt; [[1]]
+#&gt; [1] 1
+#&gt; 
+#&gt; [[2]]
+#&gt; [1] &quot;A&quot;
+#&gt; 
+#&gt; [[3]]
+#&gt;   B C
+#&gt; 1 1 2
+</code></pre>
+
+<p>The container&#39;s print method presents the content more compact similar to <code>utils::str</code></p>
+
+<pre><code class="r">print(collection)
+#&gt; &lt;Container&gt; of 3 elements: List of 3
+#&gt;  $ : num 1
+#&gt;  $ : chr &quot;A&quot;
+#&gt;  $ :&#39;data.frame&#39;:    1 obs. of  2 variables:
+#&gt;   ..$ B: num 1
+#&gt;   ..$ C: num 2
+</code></pre>
+
+<p>If initialized with an R object, the type of the object is adopted to allow for efficient internal representations, if required.</p>
+
+<pre><code class="r">ints &lt;- container(integer())
+type(ints)
+#&gt; [1] &quot;integer&quot;
+</code></pre>
+
+<p>Initialization also works with vectors.</p>
+
+<pre><code class="r">ints &lt;- container(1:10)
+print(ints)
+#&gt; &lt;Container&gt; of 10 elements:  int [1:10] 1 2 3 4 5 6 7 8 9 10
+
+values(ints)
+#&gt;  [1]  1  2  3  4  5  6  7  8  9 10
+
+size(ints)
+#&gt; [1] 10
+</code></pre>
+
+<h4>discard, remove</h4>
+
+<pre><code class="r">has(ints, 11)
+#&gt; [1] FALSE
+
+has(ints, 7)
+#&gt; [1] TRUE
+
+discard(ints, 7)
+has(ints, 7)
+#&gt; [1] FALSE
+
+remove(ints, 8)
+values(ints)
+#&gt; [1]  1  2  3  4  5  6  9 10
+</code></pre>
+
+<p>Using <code>remove</code> on non-existent elements throws an error,</p>
+
+<pre><code class="r">remove(ints, 8)
+#&gt; Error in x$remove(elem, right): 8 not in Container
+</code></pre>
+
+<p>but discard does not.</p>
+
+<pre><code class="r">discard(ints, 8) # ok
+</code></pre>
+
+<p>Discard and remove work also from the right.</p>
+
+<pre><code class="r">values(add(ints, 1:3))
+#&gt;  [1]  1  2  3  4  5  6  9 10  1  2  3
+
+values(discard(ints, 1))
+#&gt;  [1]  2  3  4  5  6  9 10  1  2  3
+
+values(discard(ints, 2, right=TRUE))
+#&gt; [1]  2  3  4  5  6  9 10  1  3
+</code></pre>
+
+<p>More details and examples are found in the online help (see <code>?Container</code>).</p>
+
+<h3>Reference semantics and iterator</h3>
+
+<p>Being based on R6 classes, any <code>Container</code> object provides reference semantics.</p>
+
+<pre><code class="r">members &lt;- print(container(c(&quot;Lisa&quot;, &quot;Bob&quot;, &quot;Joe&quot;)))
+#&gt; &lt;Container&gt; of 3 elements:  chr [1:3] &quot;Lisa&quot; &quot;Bob&quot; &quot;Joe&quot;
+
+remove_Joe &lt;- function(cont) discard(cont, &quot;Joe&quot;)
+remove_Joe(members)
+members
+#&gt; &lt;Container&gt; of 2 elements:  chr [1:2] &quot;Lisa&quot; &quot;Bob&quot;
+</code></pre>
+
+<pre><code class="r">it &lt;- iter(members)
+print(it)
+#&gt; &lt;Iterator&gt; at position 0
+
+while(ithas_next(it)) {
+    print(itget_next(it))
+    print(it)
+}
+#&gt; [1] &quot;Lisa&quot;
+#&gt; &lt;Iterator&gt; at position 1 
+#&gt; [1] &quot;Bob&quot;
+#&gt; &lt;Iterator&gt; at position 2
+</code></pre>
+
+<p>Once iterated to the last element, trying to iterate further leads to an error.</p>
+
+<pre><code class="r">itget_next(it)
+#&gt; Error in private$`i++`(): Iterator has no more elements.
+</code></pre>
+
+<h2>Deque</h2>
+
+<pre><code class="r">d &lt;- deque(0L)
+type(d)
+#&gt; [1] &quot;integer&quot;
+d
+#&gt; &lt;Deque&gt; of 1 elements:  int 0
+</code></pre>
+
+<h4>addleft, count</h4>
+
+<pre><code class="r">add(d, 1)
+add(d, 2)
+addleft(d, 1)
+addleft(d, 2)
+values(d)
+#&gt; [1] 2 1 0 1 2
+
+count(d, 0)  # count number of 0s
+#&gt; [1] 1
+
+count(d, 1)  # count number of 1s
+#&gt; [1] 2
+</code></pre>
+
+<h4>peek, pop</h4>
+
+<p>A <code>peek</code> shows the last value, while <code>pop</code> shows and removes it afterwards. </p>
+
+<pre><code class="r">peek(d)
+#&gt; [1] 2
+
+pop(d)
+#&gt; [1] 2
+
+pop(d)
+#&gt; [1] 1
+
+d
+#&gt; &lt;Deque&gt; of 3 elements:  int [1:3] 2 1 0
+</code></pre>
+
+<p>Being a double-ended queue, both methods are also defined for the left side.</p>
+
+<pre><code class="r">peekleft(d)
+#&gt; [1] 2
+
+popleft(d)
+#&gt; [1] 2
+
+d
+#&gt; &lt;Deque&gt; of 2 elements:  int [1:2] 1 0
+</code></pre>
+
+<p>Invoking <code>peek</code> on an empty <code>Deque</code> gives <code>NULL</code> while <code>pop</code> stops with an error.</p>
+
+<pre><code class="r">peek(deque())
+#&gt; NULL
+
+pop(deque())
+#&gt; Error in x$pop(): pop at empty Deque
+</code></pre>
+
+<h4>rotate, reverse</h4>
+
+<pre><code class="r">values(add(d, rep(0, 3)))
+#&gt; [1] 1 0 0 0 0
+
+values(rotate(d))    # rotate 1 to the right
+#&gt; [1] 0 1 0 0 0
+
+values(rotate(d, 2))   # rotate 2 to the right
+#&gt; [1] 0 0 0 1 0
+
+values(rotate(d, -3))  # rotate 3 to the left
+#&gt; [1] 1 0 0 0 0
+
+values(addleft(d, 4:2))
+#&gt; [1] 4 3 2 1 0 0 0 0
+
+values(reverse(d))
+#&gt; [1] 0 0 0 0 1 2 3 4
+</code></pre>
+
+<p>There is also a <code>+</code>-operator available, which does <em>not</em> work by reference but returns a fresh copy.</p>
+
+<pre><code class="r">d
+#&gt; &lt;Deque&gt; of 8 elements:  int [1:8] 0 0 0 0 1 2 3 4
+
+5:6 + d
+#&gt; &lt;Deque&gt; of 10 elements:  int [1:10] 5 6 0 0 0 0 1 2 3 4
+
+d + 5:6
+#&gt; &lt;Deque&gt; of 10 elements:  int [1:10] 0 0 0 0 1 2 3 4 5 6
+</code></pre>
+
+<h4>Deque iterator</h4>
+
+<p>As a silly example, define a reverse perfect shuffler.</p>
+
+<pre><code class="r">reverse_ps &lt;- function(x)
+{
+    it &lt;- iter(seq_along(x))
+    d &lt;- deque(integer())
+
+    while(ithas_next(it)) {
+        itnext(it)
+        d$add(itget(it))
+        if (ithas_next(it)) d$addleft(itget_next(it))
+    }
+    x[values(d)]
+}
+
+(zz &lt;- rep(c(0, 1), 10))
+#&gt;  [1] 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1
+
+reverse_ps(zz)
+#&gt;  [1] 1 1 1 1 1 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0
+</code></pre>
+
+<h2>Set</h2>
+
+<pre><code class="r">s1 &lt;- set(1:3)
+s1
+#&gt; &lt;Set&gt; of 3 elements:  int [1:3] 1 2 3
+
+add(s1, 1)  # does not change the set 
+s1
+#&gt; &lt;Set&gt; of 3 elements:  int [1:3] 1 2 3
+</code></pre>
+
+<h4>set operators</h4>
+
+<pre><code class="r">s1 &lt;- set(c(1, 2,    4, 5))
+s2 &lt;- set(c(   2, 3,    5, 6))
+
+s1 + s2
+#&gt; &lt;Set&gt; of 6 elements:  num [1:6] 1 2 4 5 3 6
+
+s1 / s2
+#&gt; &lt;Set&gt; of 2 elements:  num [1:2] 2 5
+
+s1 - s2
+#&gt; &lt;Set&gt; of 2 elements:  num [1:2] 1 4
+
+s1 &lt; s2
+#&gt; [1] FALSE
+
+s1 &lt; (s1 + s2)
+#&gt; [1] TRUE
+
+(s1 / s2) &lt; s1
+#&gt; [1] TRUE
+
+s1 == s2
+#&gt; [1] FALSE
+
+s1 == s1
+#&gt; [1] TRUE
+
+s1 &gt; s2
+#&gt; [1] FALSE
+
+(s1 + s2) &gt; s2
+#&gt; [1] TRUE
+</code></pre>
+
+<h2>Dict</h2>
+
+<pre><code class="r">(ages &lt;- dict(c(Peter=24, Lisa=23, Bob=32)))
+#&gt; &lt;Dict&gt; of 3 elements:  Named num [1:3] 24 23 32
+#&gt;  - attr(*, &quot;names&quot;)= chr [1:3] &quot;Peter&quot; &quot;Lisa&quot; &quot;Bob&quot;
+
+keys(ages)
+#&gt; [1] &quot;Peter&quot; &quot;Lisa&quot;  &quot;Bob&quot;
+
+peek(ages, &quot;Lisa&quot;)
+#&gt; [1] 23
+
+peek(ages, &quot;Anna&quot;)
+#&gt; NULL
+</code></pre>
+
+<h4>add, discard, remove</h4>
+
+<p>Due to the key-value semantic, several <code>Container</code> methods are modified/extended to take the key argument.</p>
+
+<pre><code class="r">values(add(ages, &quot;Albert&quot;, 139))
+#&gt;  Peter   Lisa    Bob Albert 
+#&gt;     24     23     32    139
+
+add(ages, &quot;Bob&quot;, 40)
+#&gt; Error in x$add(key, value): key &#39;Bob&#39; already in Dict
+
+has(ages, &quot;Peter&quot;)
+#&gt; [1] TRUE
+
+values(discard(ages, &quot;Albert&quot;))
+#&gt; Peter  Lisa   Bob 
+#&gt;    24    23    32
+
+# Trying to discard a non-existing key has no effect ...
+discard(ages, &quot;Albert&quot;)
+
+# ... but trying to remove a non-existing key throws an error
+remove(ages, &quot;Albert&quot;)
+#&gt; Error in x$remove(key): key &#39;Albert&#39; not in Dict
+</code></pre>
+
+<h4>add vs setval</h4>
+
+<p>Trying to set a value at a non-existing key throws an error unless the method is explicitly told to add it to the <code>Dict</code>.</p>
+
+<pre><code class="r">setval(ages, &quot;Anna&quot;, 23)
+#&gt; Error in x$set(key, value, add): key &#39;Anna&#39; not in Dict
+#ages[[&quot;Anna&quot;]] &lt;- 23             
+
+setval(ages, &quot;Anna&quot;, 23, add=TRUE)  # alternatively: add(ages, &quot;Anna&quot;, 23)
+#ages[[&quot;Anna&quot;, add=TRUE]] &lt;- 23
+ages
+#&gt; &lt;Dict&gt; of 4 elements:  Named num [1:4] 24 23 32 23
+#&gt;  - attr(*, &quot;names&quot;)= chr [1:4] &quot;Peter&quot; &quot;Lisa&quot; &quot;Bob&quot; &quot;Anna&quot;
+</code></pre>
+
+<p>This allows fine control over the insert-behaviour of the <code>Dict</code>. If already existing, the value is overwritten.</p>
+
+<pre><code class="r">setval(ages, &quot;Lisa&quot;, 11)
+#ages[[&quot;Lisa&quot;]] &lt;- 11
+
+values(ages)
+#&gt; Peter  Lisa   Bob  Anna 
+#&gt;    24    11    32    23
+</code></pre>
+
+<h4>peek, pop, and popitem</h4>
+
+<p>A similar control is provided via the different methods to retrieve elements.</p>
+
+<pre><code class="r">pop(ages, &quot;Lisa&quot;)
+#&gt; [1] 11
+
+values(ages)
+#&gt; Peter   Bob  Anna 
+#&gt;    24    32    23
+
+pop(ages, &quot;Lisa&quot;)
+#&gt; Error in self$remove(key): key &#39;Lisa&#39; not in Dict
+
+getval(ages, &quot;Lisa&quot;)
+#&gt; Error in x$get(key): key &#39;Lisa&#39; not in Dict
+
+peek(ages, &quot;Lisa&quot;)
+#&gt; NULL
+</code></pre>
+
+<p>Finally, the <code>Dict</code> could also be used as a sampler (without replacement).</p>
+
+<pre><code class="r">set.seed(123)
+while(!ages$empty()) print(ages$popitem())
+#&gt; Peter 
+#&gt;    24 
+#&gt; Anna 
+#&gt;   23 
+#&gt; Bob 
+#&gt;  32
+</code></pre>
+
+<h4>update</h4>
+
+<pre><code class="r">shoplist &lt;- dict(list(eggs=10, potatoes=10, bananas=5, apples=4))
+
+shoplist2 &lt;- dict(list(eggs=6, broccoli=4))
+
+unlist(values(update(shoplist, shoplist2)))
+#&gt;     eggs potatoes  bananas   apples broccoli 
+#&gt;        6       10        5        4        4
+</code></pre>
+
+<h4>dict operators</h4>
+
+<p>To enhance interactive use, various operators are provided for existing methods (see also overview table above). </p>
+
+<pre><code class="r">d &lt;- dict()
+d[&quot;A&quot;] &lt;- 1             # add(d, &quot;A&quot;, 1)
+
+d
+#&gt; &lt;Dict&gt; of 1 elements: List of 1
+#&gt;  $ A: num 1
+
+d[&quot;A&quot;] &lt;- 2             # add(d, &quot;A&quot;, 2)
+#&gt; Error in dic$add(key, value): key &#39;A&#39; already in Dict
+
+d[[&quot;A&quot;]] &lt;- 2           # setval(d, &quot;A&quot;, 2)
+
+d[[&quot;B&quot;]] &lt;- 3           # setval(d, &quot;A&quot;, 3)
+#&gt; Error in dic$set(key, value, add): key &#39;B&#39; not in Dict
+
+d[[&quot;B&quot;, add=T]] &lt;- 3    # setval(d, &quot;A&quot;, 3, add=T)
+
+d
+#&gt; &lt;Dict&gt; of 2 elements: List of 2
+#&gt;  $ A: num 2
+#&gt;  $ B: num 3
+
+d[&quot;A&quot;]                  # peek(d, &quot;A&quot;)
+#&gt; [1] 2
+
+d[[&quot;C&quot;]]                # getval(d, &quot;C&quot;)
+#&gt; Error in dic$get(key): key &#39;C&#39; not in Dict
+
+d[&quot;C&quot;]                  # peek(d, &quot;C&quot;)
+#&gt; NULL
+</code></pre>
+
+<pre><code class="r">other &lt;- dict(list(B=7, C=10))
+d + other
+#&gt; &lt;Dict&gt; of 3 elements: List of 3
+#&gt;  $ A: num 2
+#&gt;  $ B: num 7
+#&gt;  $ C: num 10
+
+d - other
+#&gt; &lt;Dict&gt; of 1 elements: List of 1
+#&gt;  $ A: num 2
+</code></pre>
+
+<h2>Conversion from and to base R types</h2>
+
+<pre><code class="r">(co &lt;- as.container(1:3))
+#&gt; &lt;Container&gt; of 3 elements:  int [1:3] 1 2 3
+
+as.vector(co)
+#&gt; [1] 1 2 3
+
+as.list(co)
+#&gt; [[1]]
+#&gt; [1] 1
+#&gt; 
+#&gt; [[2]]
+#&gt; [1] 2
+#&gt; 
+#&gt; [[3]]
+#&gt; [1] 3
+
+df &lt;- data.frame(A=1:3, B=3:1)
+
+d &lt;- as.dict(df)
+d
+#&gt; &lt;Dict&gt; of 2 elements: List of 2
+#&gt;  $ A: int [1:3] 1 2 3
+#&gt;  $ B: int [1:3] 3 2 1
+
+as.data.frame(d)
+#&gt;   A B
+#&gt; 1 1 3
+#&gt; 2 2 2
+#&gt; 3 3 1
+</code></pre>
+
+</body>
+
+</html>

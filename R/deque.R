@@ -13,6 +13,9 @@
 #' @section Inherited methods:
 #' Inherits all methods from \code{\link[container]{Container}} class.
 #'
+#' @section R6 constructor:
+#' \code{Deque$new(x=list())}
+#'
 #' @section Deque methods:
 #' \describe{
 #'  \item{\code{addleft(elem)}}{Add \code{elem} to left side of the \code{Deque}.}
@@ -150,3 +153,12 @@ Deque$set("public", "rotate", overwrite=TRUE,
 )
 Deque$lock()
 
+
+#' @export
+deque <- function(x=list()) Deque$new(x)
+
+#' @export
+as.deque <- function(x) Deque$new(x)
+
+#' @export
+is.deque <- function(x) inherits(x, "Deque")

@@ -11,7 +11,7 @@ knitr::include_graphics("class-diagram-bare.png")
 library(container)
 
 ## ------------------------------------------------------------------------
-collection <-  Container$new()
+collection <- Container$new()
 collection$empty()
 
 ## ------------------------------------------------------------------------
@@ -24,7 +24,7 @@ collection$type()
 collection$values()
 
 ## ------------------------------------------------------------------------
-collection$print()  # alternatively: print(collection)
+collection$print()
 
 ## ------------------------------------------------------------------------
 ints <- Container$new(integer())
@@ -47,10 +47,10 @@ ints$has(7)
 
 ints$discard(7)$has(7)
 
-ints$remove(8)$has(8)
+ints$remove(8)$values()
 
-## ------------------------------------------------------------------------
-tryCatch(ints$remove(8), error = function(e) e$message)
+## ---- error=TRUE---------------------------------------------------------
+ints$remove(8)
 
 ## ------------------------------------------------------------------------
 ints$discard(8) # ok
@@ -76,10 +76,15 @@ members
 
 ## ------------------------------------------------------------------------
 it <- members$iter()
-while(it$has_next()) print(it$get_next())
+print(it)
 
-## ------------------------------------------------------------------------
-tryCatch(it$get_next(), error = function(e) e$message)
+while(it$has_next()) {
+    print(it$get_next())
+    print(it)
+}
+
+## ---- error=TRUE---------------------------------------------------------
+it$get_next()
 
 ## ------------------------------------------------------------------------
 d <- Deque$new(0L)
@@ -111,10 +116,10 @@ d$values()
 
 d$count(2)
 
-## ------------------------------------------------------------------------
+## ---- error=TRUE---------------------------------------------------------
 Deque$new()$peek()
 
-tryCatch(Deque$new()$pop(), error = function(e) e$message)
+Deque$new()$pop()
 
 ## ------------------------------------------------------------------------
 d$add(rep(0, 3))$values()
@@ -130,13 +135,22 @@ d$addleft(4:2)$values()
 d$reverse()$values()
 
 ## ------------------------------------------------------------------------
-d2 <- Deque$new(integer())
-it <- d$iter()
-while(it$has_next()) {
-    d2$add(it$get_next())
-    if (it$has_next()) d2$addleft(it$get_next())
+reverse_ps <- function(x)
+{
+    it <- Iterator$new(seq_along(x))
+    d <- Deque$new(integer())
+    
+    while(it$has_next()) {
+        it$.next()
+        d$add(it$get())
+        if (it$has_next()) d$addleft(it$get_next())
+    }
+    x[d$values()]
 }
-d2$values()
+
+(zz <- rep(c(0, 1), 10))
+
+reverse_ps(zz)
 
 ## ------------------------------------------------------------------------
 s1 <- Set$new(1:3)$print()
@@ -167,9 +181,16 @@ s1$union(s2)$is.superset(s2)
 ## ------------------------------------------------------------------------
 ages <- Dict$new(c(Peter=24, Lisa=23, Bob=32))$print()
 
+ages$keys()
+
+ages$peek("Lisa")
+
+ages$peek("Anna")
+
+## ---- error=TRUE---------------------------------------------------------
 ages$add("Albert", 139)$values()
 
-tryCatch(ages$add("Bob", 40), error = function(e) e$message)
+ages$add("Bob", 40)
 
 ages$has("Peter")
 
@@ -179,17 +200,10 @@ ages$discard("Albert")$values()
 ages$discard("Albert")$values()
 
 # Trying to remove a non-existing key throws an error
-tryCatch(ages$remove("Albert"), error = function(e) e$message)
+ages$remove("Albert")
 
-## ------------------------------------------------------------------------
-ages$keys()
-
-ages$peek("Lisa")
-
-ages$peek("Anna")
-
-## ------------------------------------------------------------------------
-tryCatch(ages$set("Anna"), error = function(e) e$message)
+## ---- error=TRUE---------------------------------------------------------
+ages$set("Anna", 23)
 
 ages$set("Anna", 23, add=TRUE)  # alternatively ages$add("Anna", 23)
 ages
@@ -197,20 +211,25 @@ ages
 ## ------------------------------------------------------------------------
 ages$set("Lisa", 11)$values()
 
-## ------------------------------------------------------------------------
+## ---- error=TRUE---------------------------------------------------------
 ages$pop("Lisa")
 
 ages$values()
 
-tryCatch(ages$pop("Lisa"), error = function(e) e$message)
+ages$pop("Lisa")
 
-tryCatch(ages$get("Lisa"), error = function(e) e$message)
+ages$get("Lisa")
 
 ages$peek("Lisa")
 
 ## ------------------------------------------------------------------------
 set.seed(123)
-while(!ages$empty()) {
-    print(ages$popitem())
-}
+while(!ages$empty()) print(ages$popitem())
+
+## ------------------------------------------------------------------------
+shoplist <- Dict$new(list(eggs=10, potatoes=10, bananas=5, apples=4))
+
+shoplist2 <- Dict$new(list(eggs=6, broccoli=4))
+
+shoplist$update(shoplist2)$values()
 
