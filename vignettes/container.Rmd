@@ -1,0 +1,197 @@
+---
+title: "Introduction to container"
+output:
+  rmarkdown::html_vignette:
+    toc: true
+    toc_depth: 4
+description: >
+  Start here if this is your first time using container. This vignette
+  describes when and when not to use container, and gives a brief introduction
+  on basic container operations.
+vignette: >
+  %\VignetteIndexEntry{Introduction to container}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r knitr-setup, include = FALSE}
+unloadNamespace("dplyr")
+require(container)
+has = container::has
+has_name = container::has_name
+
+
+knitr::opts_chunk$set(
+  comment = "#",
+  prompt = F,
+  tidy = FALSE,
+  cache = FALSE,
+  collapse = T
+)
+
+options(width = 100L)
+```
+
+
+## When *not* to use container
+
+Don't bother using the `container` framework if *speed* is of high importance.
+An exception is the `dict.table` class, which is very fast as it is based on
+[data.table](https://CRAN.R-project.org/package=data.table).
+Other than that, if computation speed is critical for your application,
+we refer you to using base R *list* or packages that were optimized for
+performance, such as the
+[collections](https://CRAN.R-project.org/package=collections) package.
+
+
+## When to use container
+Consider using the `container` framework over base `list` if you are looking
+for ...
+
+* feature-rich and safe access, replace, and remove
+  [operations for robust code](code-development.html)
+* feature rich [specialized data structures](deque-set-dict.html) beyond lists
+* lists with [reference semantics](reference-semantics.html).
+
+Furthermore consider using `dict.table` for a flexible and robust way to
+[manage data columns](manage-data-columns.html) of `data.table`s.
+
+
+## container in interactive R session
+
+In an interactive R session a `container` can be used similar to a base
+R `list`, but also provides some extra features.
+For easier typing it's recommended to use the shorter `cont`.
+
+```{r}
+library(container)
+co = cont(a = 1, b = 1:10)  # same as co = container(a = 1, b = 1:10)
+```
+
+The container print method is designed to be very compact.
+```{r}
+print(co)
+```
+
+For more verbose output, either convert to a base `list` ...
+```{r}
+as.list(co)
+```
+
+or use `str`.
+```{r}
+str(co)
+```
+
+Both `length` and `names` work as usual.
+```{r}
+length(co)
+
+names(co)
+
+names(co)[1] <- "A"
+co
+```
+
+A container can also be constructed from a list.
+```{r}
+l = list(x = (1:2)^1, y = (1:2)^2)
+co2 = as.container(l)
+co2
+```
+
+
+### Add elements
+
+Elements can be added by concatenation,
+```{r}
+c(co, co2)
+```
+or name,
+```{r}
+co[["c"]] <- 3
+co
+```
+
+and containers can be nested.
+```{r}
+co[["co2"]] <- co2
+co
+```
+
+In contrast to base R `list`, elements cannot be added via positional index
+if it exceeds the container's length.
+```{r, error = TRUE}
+co[[5]] <- 5
+```
+
+
+### Replace values
+
+Single or multiple value replacement works as usual.
+```{r}
+co[[3]] <- 0
+co[1:2] <- 0
+co
+```
+
+In contrast to base `list`, containers can take a mix of numeric and character
+indices.
+```{r}
+co[list("A", 2, "c")] <- list(1, 2, "three")
+co
+```
+
+Another option for container object is to replace *by value*.
+```{r}
+co[[{"three"}]] <- 3
+co
+```
+
+This works for any data type.
+```{r}
+co[[{co2}]] <- 3
+co
+```
+
+
+### Extract
+The standard operators to access elements also should be familiar to R users.
+^[Note that the `$` operator does not work.]
+```{r}
+co[[1]]
+co[1:3]
+```
+
+As another option, you can pass any number of indices, possibly mixed as numeric
+and character.
+```{r}
+co[1, 3, "b"]
+
+co[2:1, "A"]
+```
+
+Invalid indices don't produce `NULL`s but are just ignored.
+```{r}
+co[1:100]
+```
+
+
+### Inspect
+Count the number of elements.
+```{r}
+count(co, 1)
+count(co, 3)
+```
+
+
+Use the apply family.
+```{r}
+sapply(co, is.numeric)
+
+sapply(co, function(x) x + 1)
+```
+
+## container in code development
+
+Next, see vignette [Container operations for robust code](code-development.html).

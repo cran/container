@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+
+<title>Manage data columns with dict.table</title>
+
+<link href="data:text/css;charset=utf-8,%0Aa%2Eanchor%2Dsection%20%7Bmargin%2Dleft%3A%2010px%3B%20visibility%3A%20hidden%3B%20color%3A%20inherit%3B%7D%0Aa%2Eanchor%2Dsection%3A%3Abefore%20%7Bcontent%3A%20%27%23%27%3B%7D%0A%2EhasAnchor%3Ahover%20a%2Eanchor%2Dsection%20%7Bvisibility%3A%20visible%3B%7D%0A" rel="stylesheet" />
+<script src="data:application/x-javascript;base64,Ly8gQW5jaG9yIHNlY3Rpb25zIHYxLjAgd3JpdHRlbiBieSBBdHN1c2hpIFlhc3Vtb3RvIG9uIE9jdCAzcmQsIDIwMjAuCmRvY3VtZW50LmFkZEV2ZW50TGlzdGVuZXIoJ0RPTUNvbnRlbnRMb2FkZWQnLCBmdW5jdGlvbigpIHsKICAvLyBEbyBub3RoaW5nIGlmIEFuY2hvckpTIGlzIHVzZWQKICBpZiAodHlwZW9mIHdpbmRvdy5hbmNob3JzID09PSAnb2JqZWN0JyAmJiBhbmNob3JzLmhhc093blByb3BlcnR5KCdoYXNBbmNob3JKU0xpbmsnKSkgewogICAgcmV0dXJuOwogIH0KCiAgY29uc3QgaCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3JBbGwoJ2gxLCBoMiwgaDMsIGg0LCBoNSwgaDYnKTsKCiAgLy8gRG8gbm90aGluZyBpZiBzZWN0aW9ucyBhcmUgYWxyZWFkeSBhbmNob3JlZAogIGlmIChBcnJheS5mcm9tKGgpLnNvbWUoeCA9PiB4LmNsYXNzTGlzdC5jb250YWlucygnaGFzQW5jaG9yJykpKSB7CiAgICByZXR1cm4gbnVsbDsKICB9CgogIC8vIFVzZSBzZWN0aW9uIGlkIHdoZW4gcGFuZG9jIHJ1bnMgd2l0aCAtLXNlY3Rpb24tZGl2cwogIGNvbnN0IHNlY3Rpb25faWQgPSBmdW5jdGlvbih4KSB7CiAgICByZXR1cm4gKCh4LmNsYXNzTGlzdC5jb250YWlucygnc2VjdGlvbicpIHx8ICh4LnRhZ05hbWUgPT09ICdTRUNUSU9OJykpCiAgICAgICAgICAgID8geC5pZCA6ICcnKTsKICB9OwoKICAvLyBBZGQgYW5jaG9ycwogIGguZm9yRWFjaChmdW5jdGlvbih4KSB7CiAgICBjb25zdCBpZCA9IHguaWQgfHwgc2VjdGlvbl9pZCh4LnBhcmVudEVsZW1lbnQpOwogICAgaWYgKGlkID09PSAnJykgewogICAgICByZXR1cm4gbnVsbDsKICAgIH0KICAgIGxldCBhbmNob3IgPSBkb2N1bWVudC5jcmVhdGVFbGVtZW50KCdhJyk7CiAgICBhbmNob3IuaHJlZiA9ICcjJyArIGlkOwogICAgYW5jaG9yLmNsYXNzTGlzdCA9IFsnYW5jaG9yLXNlY3Rpb24nXTsKICAgIHguY2xhc3NMaXN0LmFkZCgnaGFzQW5jaG9yJyk7CiAgICB4LmFwcGVuZENoaWxkKGFuY2hvcik7CiAgfSk7Cn0pOwo="></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css" data-origin="pandoc">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+<link href="data:text/css;charset=utf-8,body%20%7B%0Abackground%2Dcolor%3A%20%23fff%3B%0Amargin%3A%201em%20auto%3B%0Amax%2Dwidth%3A%20700px%3B%0Aoverflow%3A%20visible%3B%0Apadding%2Dleft%3A%202em%3B%0Apadding%2Dright%3A%202em%3B%0Afont%2Dfamily%3A%20%22Open%20Sans%22%2C%20%22Helvetica%20Neue%22%2C%20Helvetica%2C%20Arial%2C%20sans%2Dserif%3B%0Afont%2Dsize%3A%2014px%3B%0Aline%2Dheight%3A%201%2E35%3B%0A%7D%0A%23TOC%20%7B%0Aclear%3A%20both%3B%0Amargin%3A%200%200%2010px%2010px%3B%0Apadding%3A%204px%3B%0Awidth%3A%20400px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Aborder%2Dradius%3A%205px%3B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Afont%2Dsize%3A%2013px%3B%0Aline%2Dheight%3A%201%2E3%3B%0A%7D%0A%23TOC%20%2Etoctitle%20%7B%0Afont%2Dweight%3A%20bold%3B%0Afont%2Dsize%3A%2015px%3B%0Amargin%2Dleft%3A%205px%3B%0A%7D%0A%23TOC%20ul%20%7B%0Apadding%2Dleft%3A%2040px%3B%0Amargin%2Dleft%3A%20%2D1%2E5em%3B%0Amargin%2Dtop%3A%205px%3B%0Amargin%2Dbottom%3A%205px%3B%0A%7D%0A%23TOC%20ul%20ul%20%7B%0Amargin%2Dleft%3A%20%2D2em%3B%0A%7D%0A%23TOC%20li%20%7B%0Aline%2Dheight%3A%2016px%3B%0A%7D%0Atable%20%7B%0Amargin%3A%201em%20auto%3B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dcolor%3A%20%23DDDDDD%3B%0Aborder%2Dstyle%3A%20outset%3B%0Aborder%2Dcollapse%3A%20collapse%3B%0A%7D%0Atable%20th%20%7B%0Aborder%2Dwidth%3A%202px%3B%0Apadding%3A%205px%3B%0Aborder%2Dstyle%3A%20inset%3B%0A%7D%0Atable%20td%20%7B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dstyle%3A%20inset%3B%0Aline%2Dheight%3A%2018px%3B%0Apadding%3A%205px%205px%3B%0A%7D%0Atable%2C%20table%20th%2C%20table%20td%20%7B%0Aborder%2Dleft%2Dstyle%3A%20none%3B%0Aborder%2Dright%2Dstyle%3A%20none%3B%0A%7D%0Atable%20thead%2C%20table%20tr%2Eeven%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Ap%20%7B%0Amargin%3A%200%2E5em%200%3B%0A%7D%0Ablockquote%20%7B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Apadding%3A%200%2E25em%200%2E75em%3B%0A%7D%0Ahr%20%7B%0Aborder%2Dstyle%3A%20solid%3B%0Aborder%3A%20none%3B%0Aborder%2Dtop%3A%201px%20solid%20%23777%3B%0Amargin%3A%2028px%200%3B%0A%7D%0Adl%20%7B%0Amargin%2Dleft%3A%200%3B%0A%7D%0Adl%20dd%20%7B%0Amargin%2Dbottom%3A%2013px%3B%0Amargin%2Dleft%3A%2013px%3B%0A%7D%0Adl%20dt%20%7B%0Afont%2Dweight%3A%20bold%3B%0A%7D%0Aul%20%7B%0Amargin%2Dtop%3A%200%3B%0A%7D%0Aul%20li%20%7B%0Alist%2Dstyle%3A%20circle%20outside%3B%0A%7D%0Aul%20ul%20%7B%0Amargin%2Dbottom%3A%200%3B%0A%7D%0Apre%2C%20code%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0Aborder%2Dradius%3A%203px%3B%0Acolor%3A%20%23333%3B%0Awhite%2Dspace%3A%20pre%2Dwrap%3B%20%0A%7D%0Apre%20%7B%0Aborder%2Dradius%3A%203px%3B%0Amargin%3A%205px%200px%2010px%200px%3B%0Apadding%3A%2010px%3B%0A%7D%0Apre%3Anot%28%5Bclass%5D%29%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Acode%20%7B%0Afont%2Dfamily%3A%20Consolas%2C%20Monaco%2C%20%27Courier%20New%27%2C%20monospace%3B%0Afont%2Dsize%3A%2085%25%3B%0A%7D%0Ap%20%3E%20code%2C%20li%20%3E%20code%20%7B%0Apadding%3A%202px%200px%3B%0A%7D%0Adiv%2Efigure%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0Aimg%20%7B%0Abackground%2Dcolor%3A%20%23FFFFFF%3B%0Apadding%3A%202px%3B%0Aborder%3A%201px%20solid%20%23DDDDDD%3B%0Aborder%2Dradius%3A%203px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Amargin%3A%200%205px%3B%0A%7D%0Ah1%20%7B%0Amargin%2Dtop%3A%200%3B%0Afont%2Dsize%3A%2035px%3B%0Aline%2Dheight%3A%2040px%3B%0A%7D%0Ah2%20%7B%0Aborder%2Dbottom%3A%204px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Apadding%2Dbottom%3A%202px%3B%0Afont%2Dsize%3A%20145%25%3B%0A%7D%0Ah3%20%7B%0Aborder%2Dbottom%3A%202px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Afont%2Dsize%3A%20120%25%3B%0A%7D%0Ah4%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23f7f7f7%3B%0Amargin%2Dleft%3A%208px%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Ah5%2C%20h6%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23ccc%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Aa%20%7B%0Acolor%3A%20%230033dd%3B%0Atext%2Ddecoration%3A%20none%3B%0A%7D%0Aa%3Ahover%20%7B%0Acolor%3A%20%236666ff%3B%20%7D%0Aa%3Avisited%20%7B%0Acolor%3A%20%23800080%3B%20%7D%0Aa%3Avisited%3Ahover%20%7B%0Acolor%3A%20%23BB00BB%3B%20%7D%0Aa%5Bhref%5E%3D%22http%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0Aa%5Bhref%5E%3D%22https%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0A%0Acode%20%3E%20span%2Ekw%20%7B%20color%3A%20%23555%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Edt%20%7B%20color%3A%20%23902000%3B%20%7D%20%0Acode%20%3E%20span%2Edv%20%7B%20color%3A%20%2340a070%3B%20%7D%20%0Acode%20%3E%20span%2Ebn%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Efl%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Ech%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Est%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Eco%20%7B%20color%3A%20%23888888%3B%20font%2Dstyle%3A%20italic%3B%20%7D%20%0Acode%20%3E%20span%2Eot%20%7B%20color%3A%20%23007020%3B%20%7D%20%0Acode%20%3E%20span%2Eal%20%7B%20color%3A%20%23ff0000%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Efu%20%7B%20color%3A%20%23900%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Eer%20%7B%20color%3A%20%23a61717%3B%20background%2Dcolor%3A%20%23e3d2d2%3B%20%7D%20%0A" rel="stylesheet" type="text/css" />
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">Manage data columns with dict.table</h1>
+
+
+<div id="TOC">
+<ul>
+<li><a href="#motivation">Motivation</a></li>
+<li><a href="#column-operations">Column operations</a><ul>
+<li><a href="#add">Add</a></li>
+<li><a href="#modify">Modify</a></li>
+<li><a href="#extract">Extract</a></li>
+<li><a href="#remove">Remove</a></li>
+</ul></li>
+<li><a href="#benchmark">Benchmark</a></li>
+<li><a href="#combine-dplyr-and-dict.table">Combine dplyr and dict.table</a></li>
+<li><a href="#summary">Summary</a></li>
+</ul>
+</div>
+
+<div id="motivation" class="section level2">
+<h2>Motivation</h2>
+<p>The <a href="https://CRAN.R-project.org/package=dplyr">dplyr</a> functions <code>select</code> and <code>mutate</code> are widely used to manage data <code>data.frame</code> (or <code>tibble</code>) columns. They cover a wide range of use cases and are applied in quick data exploration as well as in data analysis pipelines. On the other hand, when implementing critical code or building R packages, developers may revert to base R to minimize errors and code dependencies. At least, both <code>mutate</code> and <code>select</code> may require additional checking, for example, to catch column name clashes.</p>
+<p>The <a href="https://CRAN.R-project.org/package=container">container</a> package in parts was developed to close this gap. With version 1.0.0, it provides <code>dict.table</code>, which can be considered a <a href="https://CRAN.R-project.org/package=data.table">data.table</a> with an extended set of functions to add, extract, remove and replace data columns with minimal required additional checking, hopefully resulting in lean and robust code.</p>
+<p>This vignette compares basic <code>dplyr</code> and <code>dict.table</code> data column operations and at the end shows that both frameworks can be easily combined.</p>
+</div>
+<div id="column-operations" class="section level2">
+<h2>Column operations</h2>
+<p>To keep matters simple, we use a tiny data set.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(container)
+<span class="kw">library</span>(dplyr)
+
+data &lt;-<span class="st"> </span><span class="kw">dict.table</span>(<span class="dt">x =</span> <span class="kw">c</span>(<span class="fl">0.2</span>, <span class="fl">0.5</span>), <span class="dt">y =</span> letters[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>])
+data
+<span class="co"># &lt;dict.table&gt; with 2 rows and 2 columns</span>
+<span class="co">#      x y</span>
+<span class="co"># 1: 0.2 a</span>
+<span class="co"># 2: 0.5 b</span></code></pre></div>
+<div id="add" class="section level3">
+<h3>Add</h3>
+<p>Let's add columns using <code>mutate</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">mutate</span>(<span class="dt">ID =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="dt">z =</span> <span class="dv">1</span>)
+<span class="co"># &lt;dict.table&gt; with 2 rows and 4 columns</span>
+<span class="co">#      x y ID z</span>
+<span class="co"># 1: 0.2 a  1 1</span>
+<span class="co"># 2: 0.5 b  2 1</span></code></pre></div>
+<p>For someone not familar with the <a href="https://www.tidyverse.org/">tidyverse</a>, this code block might read somewhat odd as the column is added and <em>not</em> mutated. To add a column via <code>dict.table</code> use <code>add</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">add</span>(<span class="dt">ID =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="dt">z =</span> <span class="dv">1</span>)
+<span class="co"># &lt;dict.table&gt; with 2 rows and 4 columns</span>
+<span class="co">#      x y ID z</span>
+<span class="co"># 1: 0.2 a  1 1</span>
+<span class="co"># 2: 0.5 b  2 1</span></code></pre></div>
+<p>The intend to <em>add</em> a column thus is stated more clearly. Next, instead of ID, let's add another numeric column <code>y</code>, which happens to &quot;name-clash&quot; with the already existing column.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">mutate</span>(<span class="dt">y =</span> <span class="dv">1</span>)
+<span class="co"># &lt;dict.table&gt; with 2 rows and 2 columns</span>
+<span class="co">#      x y</span>
+<span class="co"># 1: 0.2 1</span>
+<span class="co"># 2: 0.5 1</span></code></pre></div>
+<p>Of course, the initial y-column has been overwritten. While this was easy to see here, it may not if the data has a lot of columns or if column names are created dynamically during runtime. To catch this, usually some overhead is required.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="cf">if</span> (<span class="st">&quot;y&quot;</span> <span class="op">%in%</span><span class="st"> </span><span class="kw">colnames</span>(data)) {
+    <span class="kw">stop</span>(<span class="st">&quot;column y already exists&quot;</span>)
+} <span class="cf">else</span> {
+    data <span class="op">%&gt;%</span>
+<span class="st">        </span><span class="kw">mutate</span>(<span class="dt">y =</span> <span class="dv">1</span>)
+}
+<span class="co"># Error in eval(expr, envir, enclos): column y already exists</span></code></pre></div>
+<p>Let's see the <code>dict.table</code>-operation in comparison.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">add</span>(<span class="dt">y =</span> <span class="dv">1</span>)
+<span class="co"># Error: name 'y' exists already</span></code></pre></div>
+<p>The name clash is caught by default and therefore requires no additional checking.</p>
+</div>
+<div id="modify" class="section level3">
+<h3>Modify</h3>
+<p>If the intend was indeed to overwrite the value, the <code>dict.table</code> function <code>replace_at</code> can be used.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">replace_at</span>(<span class="dt">y =</span> <span class="dv">1</span>)
+<span class="co"># &lt;dict.table&gt; with 2 rows and 2 columns</span>
+<span class="co">#      x y</span>
+<span class="co"># 1: 0.2 1</span>
+<span class="co"># 2: 0.5 1</span>
+
+<span class="co"># or programmatically</span>
+data <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">replace_at</span>(<span class="st">&quot;y&quot;</span>, <span class="dv">1</span>)
+<span class="co"># &lt;dict.table&gt; with 2 rows and 2 columns</span>
+<span class="co">#      x y</span>
+<span class="co"># 1: 0.2 1</span>
+<span class="co"># 2: 0.5 1</span></code></pre></div>
+<p>As we saw above, if a column does not exist, <code>mutate</code> silently creates it for you. If this is not what you want, which means, you want to make sure something is overwritten, again, a workaround is needed.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="cf">if</span> (<span class="st">&quot;ID&quot;</span> <span class="op">%in%</span><span class="st"> </span><span class="kw">colnames</span>(data)) {
+    data <span class="op">%&gt;%</span>
+<span class="st">        </span><span class="kw">mutate</span>(<span class="dt">ID =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>)
+} <span class="cf">else</span> {
+    <span class="kw">stop</span>(<span class="st">&quot;column ID not in data.frame&quot;</span>)
+}
+<span class="co"># Error in eval(expr, envir, enclos): column ID not in data.frame</span></code></pre></div>
+<p>Once again, the workaround is already &quot;built-in&quot; in the <code>dict.table</code>-framework,</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">replace_at</span>(<span class="dt">ID =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>)
+<span class="co"># Error: column(s) not found: 'ID'</span></code></pre></div>
+<p>that is, <code>replace_at</code> expects the column to exist.</p>
+<p>If we were to paraphrase the intend of the <code>mutate</code> function, it probably would be something like <em>&quot;Replace a column or, if it does not exist, add it.&quot;</em>. As you may already have guessed, this can also be expressed within the <code>dict.table</code>-framework.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">replace_at</span>(<span class="dt">ID =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="dt">.add =</span> <span class="ot">TRUE</span>)
+<span class="co"># &lt;dict.table&gt; with 2 rows and 3 columns</span>
+<span class="co">#      x y ID</span>
+<span class="co"># 1: 0.2 a  1</span>
+<span class="co"># 2: 0.5 b  2</span></code></pre></div>
+</div>
+<div id="extract" class="section level3">
+<h3>Extract</h3>
+</div>
+<div id="remove" class="section level3">
+<h3>Remove</h3>
+<p>A common <a href="https://www.tidyverse.org/">tidyverse</a> approach to remove a column is based on the <code>select</code> function. One corresponding <code>dict.table</code>-function is <code>delete</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(<span class="op">-</span><span class="st">&quot;y&quot;</span>)
+<span class="co"># &lt;dict.table&gt; with 2 rows and 1 column</span>
+<span class="co">#      x</span>
+<span class="co"># 1: 0.2</span>
+<span class="co"># 2: 0.5</span>
+
+data <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">delete_at</span>(<span class="st">&quot;y&quot;</span>)
+<span class="co"># &lt;dict.table&gt; with 2 rows and 1 column</span>
+<span class="co">#      x</span>
+<span class="co"># 1: 0.2</span>
+<span class="co"># 2: 0.5</span></code></pre></div>
+<p>Let's see what happens if the column does not exist in the first place.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">select</span>(<span class="op">-</span><span class="st">&quot;ID&quot;</span>)
+<span class="co"># Error: Can't subset columns that don't exist.</span>
+<span class="co"># x Column `ID` doesn't exist.</span>
+
+data <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">delete_at</span>(<span class="st">&quot;ID&quot;</span>)
+<span class="co"># Error: column(s) not found: 'ID'</span></code></pre></div>
+<p>So in this case, both frameworks will complain. Now assume we want the column to be removed if it exist but otherwise silently ignore the command, for example:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="cf">if</span> (<span class="st">&quot;ID&quot;</span> <span class="op">%in%</span><span class="st"> </span><span class="kw">colnames</span>(data)) {
+    data <span class="op">%&gt;%</span>
+<span class="st">        </span><span class="kw">select</span>(<span class="op">-</span><span class="st">&quot;ID&quot;</span>)
+}</code></pre></div>
+<p>The <code>dict.table</code> provides a straight-forward solution via the <code>discard</code> function:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">discard_at</span>(<span class="st">&quot;ID&quot;</span>)
+<span class="co"># &lt;dict.table&gt; with 2 rows and 2 columns</span>
+<span class="co">#      x y</span>
+<span class="co"># 1: 0.2 a</span>
+<span class="co"># 2: 0.5 b</span></code></pre></div>
+</div>
+</div>
+<div id="benchmark" class="section level2">
+<h2>Benchmark</h2>
+<p>To compare the performance of both frameworks, we benchmark some column operations using the standard 'cars' data set. As a hallmark reference we use <a href="https://CRAN.R-project.org/package=data.table">data.table</a>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(microbenchmark)
+<span class="kw">library</span>(ggplot2)
+<span class="kw">library</span>(data.table)
+<span class="kw">library</span>(tibble)
+
+data =<span class="st"> </span>cars
+<span class="kw">head</span>(cars)
+<span class="co">#   speed dist</span>
+<span class="co"># 1     4    2</span>
+<span class="co"># 2     4   10</span>
+<span class="co"># 3     7    4</span>
+<span class="co"># 4     7   22</span>
+<span class="co"># 5     8   16</span>
+<span class="co"># 6     9   10</span></code></pre></div>
+<p>For the benchmark, we add, replace and finally delete a column.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">bm &lt;-<span class="st"> </span><span class="kw">microbenchmark</span>(<span class="dt">control =</span> <span class="kw">list</span>(<span class="dt">order=</span><span class="st">&quot;inorder&quot;</span>), <span class="dt">times =</span> <span class="dv">100</span>,
+
+    <span class="dt">dict.table =</span>
+        <span class="kw">as.dict.table</span>(data) <span class="op">%&gt;%</span>
+<span class="st">        </span><span class="kw">add</span>(<span class="dt">time =</span> .[[<span class="st">&quot;dist&quot;</span>]] <span class="op">/</span><span class="st"> </span>.[[<span class="st">&quot;speed&quot;</span>]]) <span class="op">%&gt;%</span>
+<span class="st">        </span><span class="kw">replace_at</span>(<span class="dt">dist =</span> <span class="dv">0</span>) <span class="op">%&gt;%</span>
+<span class="st">        </span><span class="kw">delete_at</span>(<span class="st">&quot;speed&quot;</span>),
+
+    <span class="st">`</span><span class="dt">data.table[</span><span class="st">`</span> =
+<span class="st">        </span><span class="kw">as.data.table</span>(data)[
+        ][, time <span class="op">:</span><span class="er">=</span><span class="st"> </span>dist <span class="op">/</span><span class="st"> </span>speed
+        ][, dist <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="dv">0</span>
+        ][, speed <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="ot">NULL</span>],
+
+    <span class="dt">dplyr =</span>
+        <span class="kw">as_tibble</span>(data) <span class="op">%&gt;%</span>
+<span class="st">        </span><span class="kw">mutate</span>(<span class="dt">time =</span> dist <span class="op">/</span><span class="st"> </span>speed) <span class="op">%&gt;%</span>
+<span class="st">        </span><span class="kw">mutate</span>(<span class="dt">dist =</span> <span class="dv">0</span>) <span class="op">%&gt;%</span>
+<span class="st">        </span><span class="kw">select</span>(<span class="op">-</span>speed)
+)
+<span class="kw">autoplot</span>(bm) <span class="op">+</span><span class="st"> </span><span class="kw">theme_bw</span>()</code></pre></div>
+<p><img src="data:image/png;base64,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" /><!-- --></p>
+<p>While <code>dict.table</code> and <code>data.table</code> performed nearly the same there is some distance to <code>dplyr</code> (about 10x). Let's examine each operation in more detail.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data =<span class="st"> </span>cars
+bm &lt;-<span class="st"> </span><span class="kw">microbenchmark</span>(<span class="dt">control =</span> <span class="kw">list</span>(<span class="dt">order=</span><span class="st">&quot;inorder&quot;</span>), <span class="dt">times =</span> <span class="dv">100</span>,
+
+    dit &lt;-<span class="st"> </span><span class="kw">as.dict.table</span>(data),
+    dit &lt;-<span class="st"> </span><span class="kw">add</span>(dit, <span class="dt">time =</span> dit[[<span class="st">&quot;dist&quot;</span>]] <span class="op">/</span><span class="st"> </span>dit[[<span class="st">&quot;speed&quot;</span>]]),
+    dit &lt;-<span class="st"> </span><span class="kw">replace_at</span>(dit, <span class="dt">dist =</span> <span class="dv">0</span>),
+    dit &lt;-<span class="st"> </span><span class="kw">delete_at</span>(dit, <span class="st">&quot;speed&quot;</span>),
+
+    dat &lt;-<span class="st">  </span><span class="kw">as.data.table</span>(data),
+    dat[, time <span class="op">:</span><span class="er">=</span><span class="st"> </span>dist <span class="op">/</span><span class="st"> </span>speed],
+    dat[, dist <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="dv">0</span>],
+    dat[, speed <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="ot">NULL</span>],
+
+    tbl &lt;-<span class="st"> </span><span class="kw">as_tibble</span>(data),
+    tbl &lt;-<span class="st"> </span><span class="kw">mutate</span>(tbl, <span class="dt">time =</span> dist <span class="op">/</span><span class="st"> </span>speed),
+    tbl &lt;-<span class="st"> </span><span class="kw">mutate</span>(tbl, <span class="dt">dist =</span> <span class="dv">0</span>),
+    tbl &lt;-<span class="st"> </span><span class="kw">select</span>(tbl, <span class="op">-</span>speed)
+)
+<span class="kw">autoplot</span>(bm) <span class="op">+</span><span class="st"> </span><span class="kw">theme_bw</span>()</code></pre></div>
+<p><img src="data:image/png;base64,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" /><!-- --></p>
+<p>Apparently, the mutate and select operations are the slowest in comparison, which for the most part should be a result of these functions providing non-standard evaluation (NSE) and generally a wide range of ways to specify the desired operation. Unsurprisingly such flexibility comes at a cost.</p>
+<p>Since the <a href="https://CRAN.R-project.org/package=data.table">data.table</a> expressions also involve NSE terms and some overhead, in this benchmark the <code>dict.table</code> performs even best. Having said that, of course, the <a href="https://CRAN.R-project.org/package=data.table">data.table</a> code can be further improved by avoiding the overhead and instead use reference semantics via the <code>data.table</code> built-in <code>set</code> function.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data =<span class="st"> </span>cars
+bm &lt;-<span class="st"> </span><span class="kw">microbenchmark</span>(<span class="dt">control =</span> <span class="kw">list</span>(<span class="dt">order=</span><span class="st">&quot;inorder&quot;</span>), <span class="dt">times =</span> <span class="dv">100</span>,
+
+    <span class="dt">dict.table =</span>
+        <span class="kw">as.dict.table</span>(data) <span class="op">%&gt;%</span>
+<span class="st">        </span><span class="kw">add</span>(<span class="dt">time =</span> dit[[<span class="st">&quot;dist&quot;</span>]] <span class="op">/</span><span class="st"> </span>dit[[<span class="st">&quot;speed&quot;</span>]]) <span class="op">%&gt;%</span>
+<span class="st">        </span><span class="kw">replace_at</span>(<span class="dt">dist =</span> <span class="dv">0</span>) <span class="op">%&gt;%</span>
+<span class="st">        </span><span class="kw">delete_at</span>(<span class="st">&quot;speed&quot;</span>),
+
+    <span class="dt">ref_dict.table =</span>
+        <span class="kw">as.dict.table</span>(data) <span class="op">%&gt;%</span>
+<span class="st">        </span><span class="kw">ref_add</span>(<span class="dt">time =</span> .[[<span class="st">&quot;dist&quot;</span>]] <span class="op">/</span><span class="st"> </span>.[[<span class="st">&quot;speed&quot;</span>]]) <span class="op">%&gt;%</span>
+<span class="st">        </span><span class="kw">ref_replace_at</span>(<span class="dt">dist =</span> <span class="dv">0</span>) <span class="op">%&gt;%</span>
+<span class="st">        </span><span class="kw">ref_delete_at</span>(<span class="st">&quot;speed&quot;</span>),
+
+    <span class="st">`</span><span class="dt">data.table[</span><span class="st">`</span> =
+<span class="st">        </span><span class="kw">as.data.table</span>(data)[
+        ][, time <span class="op">:</span><span class="er">=</span><span class="st"> </span>dist <span class="op">/</span><span class="st"> </span>speed
+        ][, dist <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="dv">0</span>
+        ][, speed <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="ot">NULL</span>],
+
+    <span class="dt">set_data.table =</span>
+        <span class="kw">as.data.table</span>(data) <span class="op">%&gt;%</span>
+<span class="st">        </span><span class="kw">set</span>(<span class="dt">j =</span> <span class="st">&quot;ID&quot;</span>, <span class="dt">value =</span> .[[<span class="st">&quot;dist&quot;</span>]] <span class="op">/</span><span class="st"> </span>.[[<span class="st">&quot;speed&quot;</span>]]) <span class="op">%&gt;%</span>
+<span class="st">        </span><span class="kw">set</span>(<span class="dt">j =</span> <span class="st">&quot;dist&quot;</span>, <span class="dt">value =</span> <span class="dv">0</span>) <span class="op">%&gt;%</span>
+<span class="st">        </span><span class="kw">set</span>(<span class="dt">j =</span> <span class="st">&quot;speed&quot;</span>, <span class="dt">value =</span> <span class="ot">NULL</span>)
+)
+
+<span class="kw">autoplot</span>(bm) <span class="op">+</span><span class="st"> </span><span class="kw">theme_bw</span>()</code></pre></div>
+<p><img src="data:image/png;base64,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" /><!-- --></p>
+<p>This puts things back into perspective. We also provided a <code>dict.table</code> version using reference semantic, which is also <code>built-in</code> and results in a slight speed improvement over the standard version. As a result, <code>data.table</code> remains the way to go when speed is key.</p>
+</div>
+<div id="combine-dplyr-and-dict.table" class="section level2">
+<h2>Combine dplyr and dict.table</h2>
+<p>Since a <code>dict.table</code> is fully compatible with <code>dplyr</code> and <code>data.table</code>, all of the presented frameworks can be easily combined in any order.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">res =<span class="st"> </span>data <span class="op">%&gt;%</span>
+<span class="st">    </span>as.dict.table <span class="op">%&gt;%</span>
+<span class="st">    </span>.[, time <span class="op">:</span><span class="er">=</span><span class="st"> </span>dist <span class="op">/</span><span class="st"> </span>speed] <span class="op">%&gt;%</span><span class="st">   </span><span class="co"># data.table</span>
+<span class="st">    </span><span class="kw">replace_at</span>(<span class="dt">dist =</span> <span class="dv">0</span>) <span class="op">%&gt;%</span><span class="st">        </span><span class="co"># container</span>
+<span class="st">    </span><span class="kw">select</span>(<span class="op">-</span>speed)                  <span class="co"># dplyr</span></code></pre></div>
+</div>
+<div id="summary" class="section level2">
+<h2>Summary</h2>
+<p>In critical code, it is usually of high priority to avoid unintended data column operations. For this, usually additional code is required to check for the existence or absence of columns. The <code>dict.table</code> framework provides a set of column operations with built-in checking, thereby yielding safer and leaner code out of the box and ultimately freeing the developer from writing some annoying checks over and over again.</p>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
