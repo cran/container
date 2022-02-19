@@ -11,12 +11,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 
 
-<meta name="date" content="2021-11-06" />
 
 <title>Reference semantics</title>
 
-<link href="data:text/css;charset=utf-8,%0Aa%2Eanchor%2Dsection%20%7Bmargin%2Dleft%3A%2010px%3B%20visibility%3A%20hidden%3B%20color%3A%20inherit%3B%7D%0Aa%2Eanchor%2Dsection%3A%3Abefore%20%7Bcontent%3A%20%27%23%27%3B%7D%0A%2EhasAnchor%3Ahover%20a%2Eanchor%2Dsection%20%7Bvisibility%3A%20visible%3B%7D%0A" rel="stylesheet" />
-<script src="data:application/x-javascript;base64,Ly8gQW5jaG9yIHNlY3Rpb25zIHYxLjAgd3JpdHRlbiBieSBBdHN1c2hpIFlhc3Vtb3RvIG9uIE9jdCAzcmQsIDIwMjAuCmRvY3VtZW50LmFkZEV2ZW50TGlzdGVuZXIoJ0RPTUNvbnRlbnRMb2FkZWQnLCBmdW5jdGlvbigpIHsKICAvLyBEbyBub3RoaW5nIGlmIEFuY2hvckpTIGlzIHVzZWQKICBpZiAodHlwZW9mIHdpbmRvdy5hbmNob3JzID09PSAnb2JqZWN0JyAmJiBhbmNob3JzLmhhc093blByb3BlcnR5KCdoYXNBbmNob3JKU0xpbmsnKSkgewogICAgcmV0dXJuOwogIH0KCiAgY29uc3QgaCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3JBbGwoJ2gxLCBoMiwgaDMsIGg0LCBoNSwgaDYnKTsKCiAgLy8gRG8gbm90aGluZyBpZiBzZWN0aW9ucyBhcmUgYWxyZWFkeSBhbmNob3JlZAogIGlmIChBcnJheS5mcm9tKGgpLnNvbWUoeCA9PiB4LmNsYXNzTGlzdC5jb250YWlucygnaGFzQW5jaG9yJykpKSB7CiAgICByZXR1cm4gbnVsbDsKICB9CgogIC8vIFVzZSBzZWN0aW9uIGlkIHdoZW4gcGFuZG9jIHJ1bnMgd2l0aCAtLXNlY3Rpb24tZGl2cwogIGNvbnN0IHNlY3Rpb25faWQgPSBmdW5jdGlvbih4KSB7CiAgICByZXR1cm4gKCh4LmNsYXNzTGlzdC5jb250YWlucygnc2VjdGlvbicpIHx8ICh4LnRhZ05hbWUgPT09ICdTRUNUSU9OJykpCiAgICAgICAgICAgID8geC5pZCA6ICcnKTsKICB9OwoKICAvLyBBZGQgYW5jaG9ycwogIGguZm9yRWFjaChmdW5jdGlvbih4KSB7CiAgICBjb25zdCBpZCA9IHguaWQgfHwgc2VjdGlvbl9pZCh4LnBhcmVudEVsZW1lbnQpOwogICAgaWYgKGlkID09PSAnJykgewogICAgICByZXR1cm4gbnVsbDsKICAgIH0KICAgIGxldCBhbmNob3IgPSBkb2N1bWVudC5jcmVhdGVFbGVtZW50KCdhJyk7CiAgICBhbmNob3IuaHJlZiA9ICcjJyArIGlkOwogICAgYW5jaG9yLmNsYXNzTGlzdCA9IFsnYW5jaG9yLXNlY3Rpb24nXTsKICAgIHguY2xhc3NMaXN0LmFkZCgnaGFzQW5jaG9yJyk7CiAgICB4LmFwcGVuZENoaWxkKGFuY2hvcik7CiAgfSk7Cn0pOwo="></script>
 
 <style type="text/css">
   code{white-space: pre-wrap;}
@@ -27,6 +24,74 @@
   ul.task-list{list-style: none;}
     </style>
 
+
+<style type="text/css">
+  code {
+    white-space: pre;
+  }
+  .sourceCode {
+    overflow: visible;
+  }
+</style>
+<style type="text/css" data-origin="pandoc">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
 
 
 
@@ -44,11 +109,38 @@
 
 
 <h1 class="title toc-ignore">Reference semantics</h1>
-<h4 class="date">2021-11-06</h4>
 
 
 
-<p>This vignette is updated in the coming days.</p>
+<p>Methods that alter Container objects usually come in two versions providing either copy or reference semantics where the latter start with 'ref_' to note the reference semantic, for example, <code>add()</code> and <code>ref_add()</code>.</p>
+<p>Since reference semantics changes the original object, it can be used to save some typing.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">co =<span class="st"> </span><span class="kw">container</span>()
+
+<span class="kw">ref_add</span>(co, <span class="dt">a =</span> <span class="dv">1</span>)
+<span class="kw">ref_add</span>(co, <span class="dt">b =</span> <span class="dv">2</span>)
+
+co
+<span class="co"># [a = 1, b = 2]</span></code></pre></div>
+<p>Although these days this usually can be achieved equally easy using pipes.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">co =<span class="st"> </span><span class="kw">container</span>() <span class="op">|</span><span class="er">&gt;</span>
+<span class="st">    </span><span class="kw">add</span>(<span class="dt">a =</span> <span class="dv">1</span>)   <span class="op">|</span><span class="er">&gt;</span>
+<span class="st">    </span><span class="kw">add</span>(<span class="dt">b =</span> <span class="dv">2</span>)</code></pre></div>
+<p>Still there might be use cases, where it makes your life a bit easier. Consider the following silly example.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">odds =<span class="st"> </span><span class="kw">container</span>()
+evens =<span class="st"> </span><span class="kw">container</span>()
+isOdd =<span class="st"> </span><span class="cf">function</span>(x) {x <span class="op">%%</span><span class="st"> </span><span class="dv">2</span> <span class="op">==</span><span class="st"> </span><span class="dv">1</span>}
+
+res =<span class="st"> </span><span class="kw">sapply</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="cf">function</span>(i) 
+    <span class="cf">if</span>(<span class="kw">isOdd</span>(i)) <span class="kw">ref_add</span>(odds, i) <span class="cf">else</span> <span class="kw">ref_add</span>(evens, i)
+)
+
+odds
+<span class="co"># [1L, 3L, 5L, 7L, 9L]</span>
+evens
+<span class="co"># [2L, 4L, 6L, 8L, 10L]</span></code></pre></div>
+<p>Using reference semantics for it's side effects (as in the above example) should be really done with care though and in most cases is probably best avoided as you risk introducing unnecessary coupling into your code.</p>
+<p>Last but not least, reference semantics can make sense when you are dealing with very large objects to avoid copying. Although, these days R often is smart enough to only copy those parts of an objects, for which a copy is really needed (copy-on-modify).</p>
+<p>To summarize, the <code>container</code> package does provide reference semantics, but it should be used with care.</p>
 
 
 

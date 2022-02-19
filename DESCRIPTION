@@ -1,8 +1,8 @@
 Package: container
 Type: Package
 Title: Extending Base R List
-Version: 1.0.0
-Date: 2021-11-03
+Version: 1.0.1
+Date: 2022-02-19
 Authors@R: 
     person("Roman", "Pahl",
     email = "roman.pahl@gmail.com", role = c("aut", "cre"))
@@ -24,5 +24,5 @@ Author: Roman Pahl [aut, cre]
 Maintainer: Roman Pahl <roman.pahl@gmail.com>
 Repository: CRAN
 RoxygenNote: 7.1.2
-Packaged: 2021-11-06 12:29:35 UTC; Roman
-Date/Publication: 2021-11-06 12:50:02 UTC
+Packaged: 2022-02-19 15:03:22 UTC; Roman
+Date/Publication: 2022-02-19 15:30:02 UTC
