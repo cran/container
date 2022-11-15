@@ -34,7 +34,7 @@ s = setnew("a", 1:3, iris)
 print(s)
 delete(s, 1:3, "a")
 delete(s, iris)
-\dontrun{
+try({
 delete(s, "b")  # "b" is not in Set
-}
+})
 }

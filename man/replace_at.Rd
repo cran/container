@@ -55,9 +55,9 @@ replace_at(co, a = 1, b = 2)
 replace_at(co, 1:2, 1:2)                 # same
 replace_at(co, c("a", "b"), list(1, 2))  # same
 
-\dontrun{
+try({
 replace_at(co, x = 1)                    # names(s) not found: 'x'
-}
+})
 replace_at(co, x = 1, .add = TRUE)       # ok (adds x = 1)
 
 
@@ -68,8 +68,8 @@ replace_at(dit, "a", 3:1)                # same
 replace_at(dit, a = 3:1, b = 6:4)
 replace_at(dit, 1:2, list(3:1, 6:4))     # same
 
-\dontrun{
+try({
 replace_at(dit, x = 1)                   # column(s) not found: 'x'
-}
+})
 replace_at(dit, x = 1, .add = TRUE)      # ok (adds column)
 }

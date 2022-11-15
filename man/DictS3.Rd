@@ -92,9 +92,7 @@ d = dict(b = "one", a = 1, f = mean, na = NA)
 print(d)
 names(d)
 
-\dontrun{
-dict(a = 1, 2)   # all elements must be named
-}
+try(dict(a = 1, 2))   # all elements must be named
 
 # Coercion
 as.dict(list(A = 1:3, B = "b"))
@@ -115,9 +113,9 @@ d1 = dict(a = 1, b = list(1, 2))
 d2 = dict(a = 2, b = list(1, 2))
 d1 + d2      # same as update(d, d2)
 d2 + d1      # same as update(d2, d)
-\dontrun{
+try({
 c(d1, d2)    # duplicated keys are not allowed for Dict
-}
+})
 d1 - d2
 d2 - d1
 d1 - d1
@@ -132,17 +130,15 @@ d1 | d2      # {a = 1, b = 2, x = 4}
 d = dict(a = 1)
 add(d, b = 2, co = container(1:3))
 
-\dontrun{
-add(d, a = 7:9)  # key 'a' already in Dict
-}
+try(add(d, a = 7:9))  # key 'a' already in Dict
 
 d = dict(a = 1, b = "z")
 replace(d, 1, 1:5)
 replace(d, "z", "a")
 
-\dontrun{
+try({
 replace(d, "a", 2)              # old element ("a") is not in Dict
-}
+})
 
 d1 = dict(a = 1, b = 2)
 d2 = dict(       b = 0, c = 3)

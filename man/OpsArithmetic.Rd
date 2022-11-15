@@ -84,9 +84,9 @@ d1 = dict(a = 1, b = list(1, 2))
 d2 = dict(a = 2, b = list(1, 2))
 d1 + d2      # same as update(d, d2)
 d2 + d1      # same as update(d2, d)
-\dontrun{
+try({
 c(d1, d2)    # duplicated keys are not allowed for Dict
-}
+})
 d1 - d2
 d2 - d1
 d1 - d1

@@ -138,9 +138,9 @@ print(d)
 ref_popleft(d)
 print(d)
 
-\dontrun{
+try({
 ref_pop(deque())  # pop at empty Deque
-}
+})
 
 d = deque(a = 1, b = 2, 3)
 rev(d)

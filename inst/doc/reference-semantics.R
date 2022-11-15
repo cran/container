@@ -8,7 +8,7 @@ knitr::opts_chunk$set(
   collapse = T
 )
 
-options(width = 100L)
+old <- options(width = 100L)
 
 ## -------------------------------------------------------------------------------------------------
 co = container()
@@ -28,10 +28,13 @@ odds = container()
 evens = container()
 isOdd = function(x) {x %% 2 == 1}
 
-res = sapply(1:10, function(i) 
+res = sapply(1:10, function(i)
     if(isOdd(i)) ref_add(odds, i) else ref_add(evens, i)
 )
 
 odds
 evens
+
+## ---- include = FALSE---------------------------------------------------------
+options(old)
 

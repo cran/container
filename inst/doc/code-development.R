@@ -7,7 +7,7 @@ knitr::opts_chunk$set(
     cache = FALSE,
  collapse = TRUE
 )
-options(width = 100L)
+old <- options(width = 100L)
 
 ## -------------------------------------------------------------------------------------------------
 co <- container()
@@ -134,4 +134,7 @@ l2 = list(   b = 0, c = 3)
 
 update(l1, l2)
 update(l2, l1)
+
+## ---- include = FALSE---------------------------------------------------------
+options(old)
 

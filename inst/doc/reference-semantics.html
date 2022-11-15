@@ -131,7 +131,7 @@ co
 evens =<span class="st"> </span><span class="kw">container</span>()
 isOdd =<span class="st"> </span><span class="cf">function</span>(x) {x <span class="op">%%</span><span class="st"> </span><span class="dv">2</span> <span class="op">==</span><span class="st"> </span><span class="dv">1</span>}
 
-res =<span class="st"> </span><span class="kw">sapply</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="cf">function</span>(i) 
+res =<span class="st"> </span><span class="kw">sapply</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="cf">function</span>(i)
     <span class="cf">if</span>(<span class="kw">isOdd</span>(i)) <span class="kw">ref_add</span>(odds, i) <span class="cf">else</span> <span class="kw">ref_add</span>(evens, i)
 )
 

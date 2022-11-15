@@ -269,9 +269,9 @@ co[["x"]]
 co = container(a = 1, b = "bar")
 (co[1:2] <- 1:2)
 
-\dontrun{
+try({
 co[3] <- 3 # index out of range
-}
+})
 (co[list(1, "b")] <- 3:4)   # mixed numeric/character index
 
 co = container(a = 1, b = 2)
@@ -299,19 +299,15 @@ add(co, 1, b = 2, c = container(1:3))
 co = container(a = 1, 2, b = 3, 4)
 at(co, 1:3)
 at(co, "a", "b", 2)
-\dontrun{
-at(co, "x")     # index 'x' not found
-at(co, 1:10)    # index 5 exceeds length of Container
-}
+try(at(co, "x"))     # index 'x' not found
+try(at(co, 1:10))    # index 5 exceeds length of Container
 
 co = container(a = 1, 2, b = 3, 4)
 at2(co, 1)
 at2(co, "a")
 at2(co, 2)
-\dontrun{
-at2(co, "x")     # index 'x' not found
-at2(co, 5)       # index 5 exceeds length of Container
-}
+try(at2(co, "x"))     # index 'x' not found
+try(at2(co, 5))       # index 5 exceeds length of Container
 
 co = container(1, 2, mean)
 clear(co)
@@ -332,18 +328,18 @@ co = container("a", 1:3, iris)
 print(co)
 delete(co, 1:3, "a")
 delete(co, iris)
-\dontrun{
+try({
 delete(co, "b")   # "b" is not in Container
-}
+})
 
 co = container(a = 1, b = 2, 3)
 delete_at(co, "a", "b")          # [3]
 delete_at(co, 1:2)               # [3]
 delete_at(co, "a", 3)            # [b = 2]
-\dontrun{
-delete_at(co, 4)                 # index out of range
-delete_at(co, "x")               # names(s) not found: 'x'
-}
+try({
+ delete_at(co, 4)                 # index out of range
+ delete_at(co, "x")               # names(s) not found: 'x'
+})
 
 co = container("a", num = 1:3, data = iris)
 print(co)
@@ -388,9 +384,9 @@ co = container(a = 1, b = 1:3, d = "foo")
 ref_pop(co, "b")
 ref_pop(co, 1)
 
-\dontrun{
+try({
 ref_pop(co, "x")  # index 'x' not found
-}
+})
 co = container(a = 1, b = 2, 3)
 rename(co, c("a", "b"), c("a1", "y"))
 print(co)
@@ -400,9 +396,9 @@ print(co)
 co = container("x", 9)
 replace(co, 9, 0)
 replace(co, "x", 0)
-\dontrun{
+try({
 replace(co, "z", 0)              # old element ("z") is not in Container
-}
+})
 replace(co, "z", 0, add = TRUE)  # ok, adds the element
 
 co = container(a = 0, b = "z")
@@ -410,9 +406,9 @@ replace_at(co, a = 1, b = 2)
 replace_at(co, 1:2, 1:2)                 # same
 replace_at(co, c("a", "b"), list(1, 2))  # same
 
-\dontrun{
+try({
 replace_at(co, x = 1)                    # names(s) not found: 'x'
-}
+})
 replace_at(co, x = 1, .add = TRUE)       # ok (adds x = 1)
 }
 \seealso{

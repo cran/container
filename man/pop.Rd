@@ -55,27 +55,27 @@ d = deque(1, 2, 3)
 ref_pop(d)
 ref_popleft(d)
 
-\dontrun{
+try({
 ref_pop(deque())  # pop at empty Deque
-}
+})
 
 # Container
 co = container(a = 1, b = 1:3, d = "foo")
 ref_pop(co, "b")
 ref_pop(co, 1)
 
-\dontrun{
+try({
 ref_pop(co, "x")  # index 'x' not found
-}
+})
 
 # dict.table
 dit = dict.table(a = 1:3, b = 4:6)
 ref_pop(dit, "a")
 ref_pop(dit, 1)
 
-\dontrun{
+try({
 ref_pop(dit, "x")  # index 'x' not found
-}
+})
 }
 \seealso{
 \code{\link[=peek]{peek()}}

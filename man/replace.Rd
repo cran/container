@@ -53,9 +53,9 @@ found, unless it is stated to explicitly add the element (see option \code{add})
 co = container("x", 9)
 replace(co, 9, 0)
 replace(co, "x", 0)
-\dontrun{
+try({
 replace(co, "z", 0)              # old element ("z") is not in Container
-}
+})
 replace(co, "z", 0, add = TRUE)  # just add the zero without replacement
 
 
@@ -63,7 +63,7 @@ d = dict(a = 1, b = "z")
 replace(d, 1, 1:5)
 replace(d, "z", "a")
 
-\dontrun{
+try({
 replace(d, "a", 2)              # old element ("a") is not in Dict
-}
+})
 }

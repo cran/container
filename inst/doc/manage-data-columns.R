@@ -16,7 +16,7 @@ knitr::opts_chunk$set(
   fig.width = 7
 )
 
-options(width = 100L)
+old <- options(width = 100L)
 
 ## -------------------------------------------------------------------------------------------------
 library(container)
@@ -188,4 +188,7 @@ res = data %>%
     .[, time := dist / speed] %>%   # data.table
     replace_at(dist = 0) %>%        # container
     select(-speed)                  # dplyr
+
+## ---- include = FALSE---------------------------------------------------------
+options(old)
 

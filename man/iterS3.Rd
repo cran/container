@@ -70,9 +70,7 @@ v = 1:3
 it = iter(v)
 it
 
-\dontrun{
-it$get_value()  # iterator does not point at a value
-}
+try(it$get_value())  # iterator does not point at a value
 
 has_value(it)
 has_next(it)

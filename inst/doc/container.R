@@ -13,7 +13,7 @@ knitr::opts_chunk$set(
   collapse = T
 )
 
-options(width = 100L)
+old <- options(width = 100L)
 
 ## -------------------------------------------------------------------------------------------------
 library(container)
@@ -92,4 +92,7 @@ count(co, 3)
 sapply(co, is.numeric)
 
 sapply(co, function(x) x + 1)
+
+## ---- include = FALSE---------------------------------------------------------
+options(old)
 

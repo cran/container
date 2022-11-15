@@ -8,7 +8,7 @@ knitr::opts_chunk$set(
   collapse = T
 )
 
-options(width = 100L)
+old <- options(width = 100L)
 
 ## -------------------------------------------------------------------------------------------------
 library(container, warn.conflicts = FALSE)
@@ -86,4 +86,7 @@ d
 d[[1]]
 
 d[2:3]
+
+## ---- include = FALSE---------------------------------------------------------
+options(old)
 

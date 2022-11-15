@@ -155,10 +155,8 @@ print(dit)
 dit[y > 5]
 (ref_discard_at(dit, "x"))                   # discard column 'x'
 
-\dontrun{
-at(dit, "x")                                 # index 'x' not found
-replace_at(dit, x = 0)                       # cannot be replaced, if it does not exist
-}
+try(at(dit, "x"))                            # index 'x' not found
+try(replace_at(dit, x = 0))                  # cannot be replaced, if it does not exist
 
 dit = replace_at(dit, x = 0, .add = TRUE)    # ok - re-adds column 'x' with all 0s
 peek_at(dit, "x")                            # glance at column 'x'
@@ -209,27 +207,21 @@ cbind(dit, dat)
 dit = dict.table(a = 1:3)
 add(dit, b = 3:1, d = 4:6)
 
-\dontrun{
-add(dit, a = 7:9)  # column 'a' already exists
-}
+try(add(dit, a = 7:9))  # column 'a' already exists
 
 dit = dict.table(a = 1:3, b = 4:6)
 at(dit, "a")
 at(dit, 2)
 at(dit, "a", 2)
-\dontrun{
-at(dit, "x")     # index 'x' not found
-at(dit, 1:3)     # index 3 exceeds length of dict.table
-}
+try(at(dit, "x"))     # index 'x' not found
+try(at(dit, 1:3))     # index 3 exceeds length of dict.table
 
 dit = dict.table(a = 1:3, b = 4:6)
 at2(dit, 1)
 at2(dit, "a")
 at2(dit, 2)
-\dontrun{
-at2(dit, "x")     # index 'x' not found
-at2(dit, 5)       # index 5 exceeds length of dict.table
-}
+try(at2(dit, "x"))     # index 'x' not found
+try(at2(dit, 5))       # index 5 exceeds length of dict.table
 
 dit = dict.table(a = 1, b = 2)
 clear(dit)
@@ -246,9 +238,9 @@ print(d2)
 delete_at(dit, "ID")
 delete_at(dit, "ID", 1)
 
-\dontrun{
+try({
 delete_at(dit, "foo")   # Column 'foo' not in dict.table
-}
+})
 
 dit = as.dict.table(head(sleep))
 discard_at(dit, "ID")
@@ -288,9 +280,9 @@ dit = dict.table(a = 1:3, b = 4:6)
 ref_pop(dit, "a")
 ref_pop(dit, 1)
 
-\dontrun{
+try({
 ref_pop(dit, "x")  # index 'x' not found
-}
+})
 
 dit = dict.table(a = 1, b = 2, c = 3)
 rename(dit, c("a", "b"), c("a1", "y"))
@@ -301,9 +293,9 @@ print(dit)
 dit = dict.table(a = 1:3)
 replace_at(dit, "a", 3:1)
 
-\dontrun{
+try({
 replace_at(dit, "b", 4:6)               # column 'b' not in dict.table
-}
+})
 replace_at(dit, "b", 4:6, .add = TRUE)  # ok, adds column
 
 # Update parts of tables (second overwrites columns of the first)
