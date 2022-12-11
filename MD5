@@ -1,4 +1,4 @@
-ebd728530f26fcd23d5c89742c4926a8 *DESCRIPTION
+a221760cc1bd3db7322917c679197e32 *DESCRIPTION
 55838a4357d3789fc84673905b0162af *NAMESPACE
 f84b0bc11ff345529a3255651719cce6 *NEWS.md
 20f42b1367902e7bd7ce802cb28ea9db *R/0-ContainerR6.R
@@ -65,7 +65,7 @@ bfa74d213765d35730d2bab9f3b67139 *inst/doc/code-development.Rmd
 2a70743392348ffd513e941e8bbd592c *inst/doc/deque-set-dict.html
 be7177ca2bb86c3865360b0450240f24 *inst/doc/manage-data-columns.R
 c8c227642e7f40cfdc3cef68e839e7a3 *inst/doc/manage-data-columns.Rmd
-258eca67d8631cb6d8bb4af0ff8e9102 *inst/doc/manage-data-columns.html
+c7f5464dcc909ac816130e31ecdedee6 *inst/doc/manage-data-columns.html
 a2eae7e95be93a2133a2dd9ababe9b52 *inst/doc/parameter-list.R
 e63e8a44d0ba8cc62667c2aabd1ecd70 *inst/doc/parameter-list.Rmd
 12c0c6e6e977c5798399ab01cd7d7030 *inst/doc/parameter-list.html
@@ -82,7 +82,7 @@ efe59b071090d52dd3a3b937849f6021 *inst/tinytest/test_0-DictS3.R
 3d59c26c80c2f63b970c5a39ec98b97a *inst/tinytest/test_0-IteratorS3.R
 43c2be90601a14e403a0dd49a0bbb155 *inst/tinytest/test_0-SetR6.R
 290b28486e3d5250af9e43e5edba7149 *inst/tinytest/test_0-SetS3.R
-ddf7b56a76f4e208d8e054c6f9e2198f *inst/tinytest/test_0-dict.table.R
+e8a75916e3b5b74474d4ecf5073b6b50 *inst/tinytest/test_0-dict.table.R
 a40bbab73e1632bb15ecfbf1434e60d3 *inst/tinytest/test_GroupGenericMath.R
 20659078fe9abcd4d36ab02b3141d47d *inst/tinytest/test_GroupGenericSummary.R
 1bb6e141f85f48e431fc48ebecc4b759 *inst/tinytest/test_Ops-arithmetic.R
@@ -125,9 +125,7 @@ e2a58a278d0c68e9a9a80e68e06d7c59 *inst/tinytest/test_replace_at.R
 e0c59d9b6057ec646875c379a48acff7 *man/Container.Rd
 d15017500ad8810a32257345b329ff32 *man/ContainerS3.Rd
 1119d1b69d0e82b177f38876de407647 *man/Deque.Rd
-5d9ec68fd8525d192f1c783d9a9f41f9 *man/DequeS3.Rd
 fe445cecfbd2c6197195799e1564d6fd *man/Dict.Rd
-e22a410e3803e82e18e7bf694696aecd *man/DictS3.Rd
 4012d7306af42243f77e9a0482387dc3 *man/Iterable.Rd
 c0e8d4d93ac3ecc95bda5b53c4212638 *man/Iterator.Rd
 21037126258f3938d4320c4dc9f66dc3 *man/OpsArithmetic.Rd
@@ -149,7 +147,9 @@ b9e0f2635c5efc093d354fff25c17df1 *man/at2.Rd
 2fbd536219ab694f2f027db216325a64 *man/delete.Rd
 5c88041dd7b78cd0fcd95d875bacbc33 *man/delete_at.Rd
 0dfa7f09e45d04d4d2ab6fdde90c981f *man/deprecated.Rd
+b4b87e6022d9cd6a94dcd382c57399b7 *man/dequeS3.Rd
 d941b37042bcabc73dec85d719e7ad4a *man/dict.table.Rd
+7001efad12ab0b1edd0427ca2682f9ee *man/dictS3.Rd
 c802daf0409278b473fd2421f230615f *man/discard.Rd
 0be6ed150a492f641a1d6a2d16a79e13 *man/discard_at.Rd
 9d5cdcf2c01c4c3f859bf44502e48207 *man/figures/logo.png
@@ -174,14 +174,14 @@ bfa74d213765d35730d2bab9f3b67139 *vignettes/code-development.Rmd
 7aeffac6f96f281415a8a5fc69f24a00 *vignettes/deque-set-dict.Rmd
 c8c227642e7f40cfdc3cef68e839e7a3 *vignettes/manage-data-columns.Rmd
 d2f1320a95e17e9b4986212232b9acc9 *vignettes/manage-data-columns_cache/html/__packages
-235703412eb1af353cf0d2f3c79c14b3 *vignettes/manage-data-columns_cache/html/benchmark1_70f411eb4a86ba5d83ce515e6be5287c.RData
-2fdaad2b55b7215a6c1ad990c65a41dd *vignettes/manage-data-columns_cache/html/benchmark1_70f411eb4a86ba5d83ce515e6be5287c.rdb
-42f496fe3aa2389d93e6af5d2d548268 *vignettes/manage-data-columns_cache/html/benchmark1_70f411eb4a86ba5d83ce515e6be5287c.rdx
-0317d2acc6ccc17e72ca907f00cc240f *vignettes/manage-data-columns_cache/html/benchmark2_552811329284dfdadcffe28af1af5ca1.RData
-c40679abac51de694c8e3fbc17b17ac0 *vignettes/manage-data-columns_cache/html/benchmark2_552811329284dfdadcffe28af1af5ca1.rdb
-d3f62801801c98c9309c967853088786 *vignettes/manage-data-columns_cache/html/benchmark2_552811329284dfdadcffe28af1af5ca1.rdx
-92e92be54bcd0d184b56cc02bc9fa88d *vignettes/manage-data-columns_cache/html/benchmark3_6e17e0a3d5b8c820bfc91a6934918e38.RData
-17c6fd5012603f7b6c70efa5192e67da *vignettes/manage-data-columns_cache/html/benchmark3_6e17e0a3d5b8c820bfc91a6934918e38.rdb
-072233f7ce53fa4f60a3b9636e475884 *vignettes/manage-data-columns_cache/html/benchmark3_6e17e0a3d5b8c820bfc91a6934918e38.rdx
+4bac3898eec34891b2ee95c96fb34038 *vignettes/manage-data-columns_cache/html/benchmark1_4a2416bfb8823c0e84ef05ebb2a4ed08.RData
+90d876aaea3caadec8496fe65786378c *vignettes/manage-data-columns_cache/html/benchmark1_4a2416bfb8823c0e84ef05ebb2a4ed08.rdb
+55a352c5cec9b81b0c0a57f752aa1a27 *vignettes/manage-data-columns_cache/html/benchmark1_4a2416bfb8823c0e84ef05ebb2a4ed08.rdx
+e9f9ac3c2ee9300fb7fcdc8928315250 *vignettes/manage-data-columns_cache/html/benchmark2_d196efd4114cf2a71286539c6d2e9a28.RData
+f6434a001004fe7b500a3eec2fe1af82 *vignettes/manage-data-columns_cache/html/benchmark2_d196efd4114cf2a71286539c6d2e9a28.rdb
+d2175a46016fa13a82b7621b1d1a9a14 *vignettes/manage-data-columns_cache/html/benchmark2_d196efd4114cf2a71286539c6d2e9a28.rdx
+10dad6e6208af6693a59132d6e8a49c6 *vignettes/manage-data-columns_cache/html/benchmark3_853090ef01ecf856aca87847009a3462.RData
+6d1ce1765325f0cdc9e48ee1f3adcbc3 *vignettes/manage-data-columns_cache/html/benchmark3_853090ef01ecf856aca87847009a3462.rdb
+050242f429280bde7d99a90e602d91e3 *vignettes/manage-data-columns_cache/html/benchmark3_853090ef01ecf856aca87847009a3462.rdx
 e63e8a44d0ba8cc62667c2aabd1ecd70 *vignettes/parameter-list.Rmd
 6821609f25f830ad42831f4e5dac2176 *vignettes/reference-semantics.Rmd
