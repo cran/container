@@ -37,17 +37,21 @@ data %>%
 data %>%
     mutate(y = 1)
 
-## ---- error=TRUE----------------------------------------------------------------------------------
+## ----error=TRUE-----------------------------------------------------------------------------------
+try({
 if ("y" %in% colnames(data)) {
     stop("column y already exists")
 } else {
     data %>%
         mutate(y = 1)
 }
+})
 
-## ---- error=TRUE----------------------------------------------------------------------------------
+## ----error=TRUE-----------------------------------------------------------------------------------
+try({
 data %>%
     add(y = 1)
+})
 
 ## -------------------------------------------------------------------------------------------------
 data %>%
@@ -57,17 +61,21 @@ data %>%
 data %>%
     replace_at("y", 1)
 
-## ---- error=TRUE----------------------------------------------------------------------------------
+## ----error=TRUE-----------------------------------------------------------------------------------
+try({
 if ("ID" %in% colnames(data)) {
     data %>%
         mutate(ID = 1:2)
 } else {
     stop("column ID not in data.frame")
 }
+})
 
-## ---- error=TRUE----------------------------------------------------------------------------------
+## ----error=TRUE-----------------------------------------------------------------------------------
+try({
 data %>%
     replace_at(ID = 1:2)
+})
 
 ## -------------------------------------------------------------------------------------------------
 data %>%
@@ -80,12 +88,14 @@ data %>%
 data %>%
     delete_at("y")
 
-## ---- error=TRUE----------------------------------------------------------------------------------
+## ----error=TRUE-----------------------------------------------------------------------------------
+try({
 data %>%
     select(-"ID")
 
 data %>%
     delete_at("ID")
+})
 
 ## -------------------------------------------------------------------------------------------------
 if ("ID" %in% colnames(data)) {
@@ -106,7 +116,7 @@ library(tibble)
 data = cars
 head(cars)
 
-## ----benchmark1, warning = FALSE, message = FALSE, cache=TRUE-------------------------------------
+## ----benchmark1, warning = FALSE, message = FALSE, cache=TRUE, fig.alt="Benchmark1"---------------
 bm <- microbenchmark(control = list(order="inorder"), times = 100,
 
     dict.table =
@@ -129,7 +139,7 @@ bm <- microbenchmark(control = list(order="inorder"), times = 100,
 )
 autoplot(bm) + theme_bw()
 
-## ----benchmark2, warning = FALSE, message = FALSE, cache=TRUE-------------------------------------
+## ----benchmark2, warning = FALSE, message = FALSE, cache=TRUE, fig.alt="Benchmark2"---------------
 data = cars
 bm <- microbenchmark(control = list(order="inorder"), times = 100,
 
@@ -150,7 +160,7 @@ bm <- microbenchmark(control = list(order="inorder"), times = 100,
 )
 autoplot(bm) + theme_bw()
 
-## ----benchmark3, warning = FALSE, message = FALSE, cache=TRUE-------------------------------------
+## ----benchmark3, warning = FALSE, message = FALSE, cache=TRUE, fig.alt="Benchmark3"---------------
 data = cars
 bm <- microbenchmark(control = list(order="inorder"), times = 100,
 
@@ -189,6 +199,6 @@ res = data %>%
     replace_at(dist = 0) %>%        # container
     select(-speed)                  # dplyr
 
-## ---- include = FALSE---------------------------------------------------------
+## ----include = FALSE----------------------------------------------------------
 options(old)
 
