@@ -9,7 +9,8 @@
 #' @docType class
 #' @importFrom R6 R6Class
 #' @seealso [Iterator] and [Container]
-Iterable <- R6::R6Class("Iterable",
+Iterable <- R6::R6Class(
+    classname = "Iterable",
     public = list(
 
         #' @description
@@ -26,8 +27,10 @@ Iterable <- R6::R6Class("Iterable",
             it
         }
     ),
-    private = list(create_iter = function()
-        stop("abstract method", call. = FALSE)),
+    private = list(
+        create_iter = function()
+        stop("abstract method", call. = FALSE)
+    ),
 
     lock_class=TRUE
 )
@@ -85,7 +88,8 @@ Iterable <- R6::R6Class("Iterable",
 #' co$update(co2)
 #' co$pop(1)
 #' co
-Container <- R6::R6Class("Container",
+Container <- R6::R6Class(
+    classname = "Container",
     inherit = Iterable,
     public = list(
         #' @description constructor
@@ -249,8 +253,9 @@ Container <- R6::R6Class("Container",
             if (is.na(name))
                 stop("undefined name", call. = FALSE)
 
-            if (isTRUE(nchar(name) == 0))
-                stop("name must consist of at least one character", call. = F)
+            if (isTRUE(nchar(name) == 0)) {
+                stop("name string must not be empty", call. = FALSE)
+            }
 
             isTRUE(utils::hasName(self$values(), name))
         },
@@ -275,25 +280,32 @@ Container <- R6::R6Class("Container",
         #' `index` is not found.
         #' @return `Container` object with the extracted elements.
         peek_at = function(index, default = NULL) {
-            if (missing(index))
+            if (missing(index)) {
                 return(self)
+            }
 
-            try_at = function(index)
-                as.list(tryCatch(self$at(index),
-                                 error = function(e) list(default)))
+            try_at <- function(index) {
+                as.list(
+                    tryCatch(
+                        self$at(index),
+                        error = function(e) list(default)
+                    )
+                )
+            }
 
-            l = lapply(index, try_at)
-            if (identical(l, list()))
+            l <- lapply(index, try_at)
+            if (identical(l, list())) {
                 return(methods::as(l, data.class(self)))
+            }
 
             # Determine positions where names need to be set
-            isChar = as.logical(sapply(index, is.character))
-            hasLen = as.logical(sapply(l, function(x) length(x) > 0))
-            pos = which(isChar & hasLen)
+            isChar <- as.logical(sapply(index, is.character))
+            hasLen <- as.logical(sapply(l, function(x) length(x) > 0))
+            pos <- which(isChar & hasLen)
 
-            ul = unlist(l, recursive = FALSE)
+            ul <- unlist(l, recursive = FALSE)
             names(ul)[pos] <- as.character(index[pos])
-            ul = Filter(ul, f = Negate(is.null))
+            ul <- Filter(ul, f = Negate(is.null))
 
             methods::as(ul, data.class(self))
         },
@@ -311,6 +323,9 @@ Container <- R6::R6Class("Container",
 
             .assert_index_arg(index)
 
+            if (is.logical(index)) {
+                index <- as.numeric(index)
+            }
             tryCatch(self$at2(index), error = function(e) default)
         },
 
@@ -345,8 +360,8 @@ Container <- R6::R6Class("Container",
         },
 
         #' @description Rename a `key` in the `Container`. An error is signaled,
-        #' if either the `old` key is not in the `Container` or the `new` key results
-        #' in a name-clash with an existing key.
+        #' if either the `old` key is not in the `Container` or the `new` key
+        #' results in a name-clash with an existing key.
         #' @param old `character` name of key to be renamed.
         #' @param new `character` new key name.
         #' @return the `Container` object
@@ -358,11 +373,16 @@ Container <- R6::R6Class("Container",
                 return(self)
             }
 
-            if (identical(old, new))
+            if (identical(old, new)) {
                 return(self)
+            }
 
-            if (new %in% names(self))
-                stop("name '", new, "' already in ", data.class(self))
+            if (new %in% names(self)) {
+                stop(
+                    "name '", new, "' already in ", data.class(self),
+                    call. = FALSE
+                )
+            }
 
             private$.rename(old, new)
             self
@@ -552,4 +572,3 @@ Container <- R6::R6Class("Container",
     ),
     lock_class = TRUE
 )
-

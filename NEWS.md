@@ -1,3 +1,54 @@
+<!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
+
+# container 1.1.0
+
+## New features
+
+* Extraction (`[.Container`):
+  * Non-standard evaluation (NSE) for ranges and mixed endpoints, e.g. `x[a:b]`,
+    `x[1:c]`, `x[d:2]`, and negative ranges like `x[-(a:c)]`.
+  * Multiple indices as separate arguments and `list(...)` sugar: `x[1, "a", 3:5]`,
+    `x[list(1, "a")]`.
+  * Logical indexing improvements with safe recycling and informative warnings when
+    the mask length doesn’t divide the container length; `NA` treated as `FALSE` with a warning.
+  * `.default` argument supported to fill unknown/out-of-bounds positive indices
+    and unknown names while preserving order and duplicates.
+  * `x[[TRUE]]` now aligns with base R to return the first element.
+
+* Replacement (`[<-.Container`):
+  * Supports the same extended indexing options as extraction, including NSE ranges,
+    mixed indices, logical masks, and negative (complement) selection.
+  * `x[] <- v` targets all positions; zero-length selections perform no replacement.
+  * Adds unknown names when replacing via character indices; numeric indices must be in-bounds.
+  * Replacement length is recycled with a warning when not a multiple of the target length.
+
+* Operators & utilities:
+  * Generic `%in%` operator added (#36).
+  * Option for shallow copy when converting container to list.
+
+## Fixes
+
+* Allow setting names for initially unnamed containers.
+
+## Internal / documentation
+
+* Refactored extract indexing into internal helper `.get_pos_indices` and reused it
+  for replace to ensure consistent semantics.
+* Reworked and expanded tests; migrated legacy tests to testthat; improved docs and vignettes
+  (interactive usage and replacement examples).
+* Renamed vignettes for CRAN ordering (#33); updated README and vignettes (#30).
+* Added News menu (this Changelog) to the package site and links to other packages via R universe.
+* Clarified OpsReplace documentation (indexing options, NULL assignment, NSE alphanumeric ranges).
+
+
+# container 1.0.5
+
+* Update pages to bootstrap 5 and github action pipelines (#26)
+  * upgrade pages to use bootstrap 5
+  * update README
+  * remove Date field in DESCRIPTION file
+  * fix documentation signaled by CRAN devel checks
+
 # container 1.0.4
 
 * fix "don't run" examples
@@ -49,7 +100,6 @@ List of changes
 * the S3 method interface now by default provides copy semantics. For reference
   semantics, functions starting with `ref_` are used.
 
-
 ## New features
 
 * new classes `OrderedSet` and `dict.table`
@@ -67,7 +117,6 @@ List of changes
 * comparison operators that compare containers *lexicographically*
 * arithmetic operators
 * group generic functions for Math and Summary
-
 
 ## Deprecated Functions
 

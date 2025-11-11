@@ -28,7 +28,7 @@ as.cont(x)
 
 is.container(x)
 
-\method{as.list}{Container}(x, ...)
+\method{as.list}{Container}(x, deep = TRUE, ...)
 
 \method{length}{Container}(x)
 
@@ -43,6 +43,9 @@ is.container(x)
 \item{x}{\code{R} object of \code{ANY} type for \link{as.container} and \link{is.container}
 or of class \link{Container} for the \code{S3} methods.}
 
+\item{deep}{\code{logical(1)} indicating whether a deep copy of the elements
+should be made when converting to a list.}
+
 \item{value}{\code{character} vector of names.}
 }
 \description{
@@ -55,7 +58,8 @@ class for \link{Deque}, \link{Set}, and \link{Dict} objects.
 \details{
 Methods that alter \link{Container} objects usually come in two versions
 providing either copy or reference semantics where the latter start with
-\code{'ref_'} to note the reference semantic, for example, \code{\link[=add]{add()}} and \code{\link[=ref_add]{ref_add()}}.
+\code{'ref_'} to note the reference semantic, for example, \code{\link[=add]{add()}} and
+\code{\link[=ref_add]{ref_add()}}.
 
 \itemize{
 \item \code{container(...)} initializes and returns a \link{Container} object.
@@ -74,8 +78,9 @@ providing either copy or reference semantics where the latter start with
 }
 
 \itemize{
-\item \code{as.list(x)} converts container \code{x} to a base R \link{list}. All of
-the container's elements are copied (deeply) during the conversion.
+\item \code{as.list(x)} converts container \code{x} to a base R \link{list}. If
+\code{deep} is \code{TRUE}, all of the container's elements are copied (deeply)
+during the conversion.
 }
 
 \itemize{
@@ -194,8 +199,9 @@ from the \code{container} object.
 }
 
 \itemize{
-\item \code{rename(.x, old, new)} and \code{ref_rename(.x, old, new)} rename one or more keys
-from \code{old} to \code{new}, respectively, by copy and in place (i.e. by reference).
+\item \code{rename(.x, old, new)} and \code{ref_rename(.x, old, new)} rename one or more
+keys from \code{old} to \code{new}, respectively, by copy and in place (i.e. by
+reference).
 }
 
 \itemize{
@@ -255,12 +261,16 @@ c1 < container(2)   # TRUE
 c1 < container()    # FALSE
 
 # Extract or replace
-co = container(a = 1, b = 2, c = 3, d = 4)
-co[1:2]
-co[1, 4]
-co["d", 2]
-co[list("d", 2)]
-co[0:10]
+co <- container(a = 1, b = 2, c = 3, d = 4)
+co[1:2]              # [a = 1, b = 2]
+co[1, 4]             # [a = 1, d = 4]
+co[0:10]             # [a = 1, b = 2, c = 3, d = 4]
+co[list(1, "d")]     # [a = 1, d = 4]
+co["d", 2]           # same
+co[-c(1:2)]          # [c = 3, d = 4]
+co[-1, -4]           # [b = 2, c = 3]
+co[-"a", -"d"]       # [b = 2, c = 3]
+co[a:b]              # [a = 1, b = 2]
 
 co = container(a = 1, b = 2)
 co[[1]]

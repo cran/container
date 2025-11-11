@@ -3,9 +3,10 @@
 #' @description These functions are provided for backwards-compatibility and
 #' may be defunct as soon as the next release.
 #' @param x any `R` object.
+#' @param ... additional arguments.
 #' @details
 #' * [empty()]      [is_empty()] instead
-#' * `set`          [setnew()] instead
+#' * [set()]        [setnew()] instead
 #' * [size()]       use [length()] instead
 #' * [sortkey()]    keys of [Dict] objects are now always sorted
 #' * [remove()]     use [delete()] instead
@@ -83,9 +84,9 @@ keys <- function(x)
 }
 
 
+#' @rdname deprecated
+#' @export
 set <- function(...) {
     .Deprecated("setnew")
     setnew(...)
 }
-
-

@@ -1,29 +1,28 @@
-Package: container
 Type: Package
+Package: container
 Title: Extending Base 'R' Lists
-Version: 1.0.5
+Version: 1.1.0
 Authors@R: 
-    person("Roman", "Pahl",
-    email = "roman.pahl@gmail.com", role = c("aut", "cre"))
-Description: Extends the functionality of base 'R' lists and
-    provides specialized data structures 'deque',
-    'set', 'dict', and 'dict.table', the latter to extend the 'data.table'
-    package.
-Depends: R (>= 3.5.0)
+    person("Roman", "Pahl", , "roman.pahl@gmail.com", role = c("aut", "cre"))
+Author: Roman Pahl [aut, cre]
+Maintainer: Roman Pahl <roman.pahl@gmail.com>
+Description: Extends the functionality of base 'R' lists and provides
+    specialized data structures 'deque', 'set', 'dict', and 'dict.table',
+    the latter to extend the 'data.table' package.
 License: GPL-3
-Encoding: UTF-8
-Imports: data.table, methods, R6
-VignetteBuilder: knitr
-Suggests: knitr, tinytest, rmarkdown, microbenchmark, ggplot2, dplyr,
-        tibble, testthat (>= 3.0.0)
 URL: https://rpahl.github.io/container/,
         https://github.com/rpahl/container
 BugReports: https://github.com/rpahl/container/issues
-NeedsCompilation: no
-Author: Roman Pahl [aut, cre]
-Maintainer: Roman Pahl <roman.pahl@gmail.com>
-Repository: CRAN
-RoxygenNote: 7.2.1
+Depends: R (>= 3.5.0)
+Imports: data.table, methods, R6, utils
+Suggests: dplyr, ggplot2, knitr, microbenchmark, rmarkdown, testthat
+        (>= 3.0.0), tibble
+VignetteBuilder: knitr
 Config/testthat/edition: 3
-Packaged: 2024-12-02 14:57:12 UTC; Roman
-Date/Publication: 2024-12-02 20:00:02 UTC
+Config/testthat/parallel: true
+Encoding: UTF-8
+NeedsCompilation: no
+Repository: CRAN
+RoxygenNote: 7.3.3
+Packaged: 2025-11-10 23:19:22 UTC; Roman
+Date/Publication: 2025-11-11 00:00:02 UTC

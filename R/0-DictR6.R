@@ -21,7 +21,8 @@
 #'
 #' d2 = Dict$new(a = 0, b = 1)
 #' d$update(d2)
-Dict <- R6::R6Class("Dict",
+Dict <- R6::R6Class(
+    classname = "Dict",
     inherit = Container,
     public = list(
         #' @description `Dict` constructor
@@ -134,7 +135,9 @@ Dict <- R6::R6Class("Dict",
         #' @param decr `logical` if `TRUE` sort in decreasing order.
         #' @return returns the `Dict`
         sort = function(decr = FALSE) {
-            .Deprecated(msg = "'sort' is deprecated - keys are now always sorted")
+            .Deprecated(
+                msg = "'sort' is deprecated - keys are now always sorted"
+            )
             self
         },
 
@@ -183,4 +186,3 @@ Dict <- R6::R6Class("Dict",
     ),
     lock_class = TRUE,
 )
-
